@@ -4,214 +4,206 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>URA Battle Schedule</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>URA Battle — Schedule & Leaderboards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1: #0f1020;
-      --bg2: #0b1430;
-      --accent: #7c5cff;
-      --accent-2: #00e6a8;
-      --glass: rgba(255,255,255,0.04);
-      --card: rgba(255,255,255,0.03);
-      --text: #e9eef8;
+      --bg1:#03040a; --bg2:#071033; --glass: rgba(255,255,255,0.03);
+      --accent:#7c5cff; --accent2:#00e6a8; --muted:#9fb4d8; --card:#071428;
+      --glass-2: rgba(255,255,255,0.02);
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
-      color:var(--text);
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent),
-                  radial-gradient(900px 500px at 90% 90%, rgba(0,230,168,0.06), transparent),
-                  linear-gradient(180deg,var(--bg1),var(--bg2));
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:32px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }.stage{
-  width:100%;
-  max-width:1100px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:18px;
-  padding:28px;
-  box-shadow: 0 8px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-  border:1px solid rgba(255,255,255,0.04);
-  backdrop-filter: blur(6px) saturate(120%);
-}
-
-header{
-  display:flex;
-  gap:18px;
-  align-items:center;
-  margin-bottom:18px;
-}
-.logo{
-  width:72px;
-  height:72px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background: linear-gradient(135deg,var(--accent),var(--accent-2));
-  box-shadow: 0 6px 24px rgba(124,92,255,0.12), 0 2px 6px rgba(0,230,168,0.06);
-  font-family: 'Orbitron', sans-serif;
-  font-weight:700;
-  color:#04121a;
-  font-size:20px;
-}
-h1{
-  margin:0;
-  font-family: 'Orbitron', sans-serif;
-  font-weight:700;
-  font-size:28px;
-  letter-spacing:0.6px;
-  color:var(--text);
-  text-shadow: 0 6px 20px rgba(0,0,0,0.6);
-}
-p.lead{
-  margin:0;
-  color: #bcd3ff;
-  opacity:0.9;
-  font-size:13px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap:18px;
-  margin-top:20px;
-}
-
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-  border-radius:12px;
-  padding:14px;
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 8px 30px rgba(2,6,23,0.45);
-  position:relative;
-  overflow:hidden;
-  min-height:160px;
-}
-.card::after{
-  content:"";
-  position:absolute;
-  right:-40px;top:-40px;width:160px;height:160px;
-  background: radial-gradient(circle at 30% 30%, rgba(124,92,255,0.06), transparent 30%), radial-gradient(circle at 70% 70%, rgba(0,230,168,0.04), transparent 30%);
-  transform: rotate(25deg);
-  pointer-events:none;
-}
-
-.card h3{margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
-.date{font-size:12px;color:#d3e3ff}
-
-ul.matches{list-style:none;padding:8px 0 0 0;margin:0;display:flex;flex-direction:column;gap:8px}
-li.match{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
-.time{font-family: 'Orbitron', sans-serif;font-size:13px;color:#cfe9ff}
+    body{margin:0;min-height:100vh;background:radial-gradient(800px 400px at 10% 10%, rgba(124,92,255,0.06), transparent), linear-gradient(180deg,var(--bg1),var(--bg2));font-family:Inter,system-ui,Arial;color:#eaf4ff;padding:28px;}
+    .wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+    header{grid-column:1 / -1;display:flex;align-items:center;gap:16px;margin-bottom:6px}
+    .logo{width:64px;height:64px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));font-family:Orbitron;color:#04121a;font-weight:700}
+    h1{margin:0;font-family:Orbitron;font-size:26px}
+    p.sub{margin:0;color:var(--muted);font-size:13px}/* main panel */
+.panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:18px;border:1px solid var(--glass);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.schedule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.day{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));padding:14px;border-radius:12px;border:1px solid var(--glass-2);position:relative;overflow:hidden}
+.day h3{margin:0;font-size:15px;display:flex;align-items:center;justify-content:space-between}
+.date{font-size:12px;color:var(--muted);padding-left:6px}
+.matches{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.match{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+.time{font-family:Orbitron;font-size:13px;min-width:78px}
 .vs{font-weight:600}
 
-.badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.03)}
+/* right column */
+aside{display:flex;flex-direction:column;gap:14px}
+table{width:100%;border-collapse:collapse}
+thead th{font-size:13px;text-align:left;padding:10px 8px;color:var(--muted);border-bottom:1px dashed rgba(255,255,255,0.03)}
+tbody td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.02)}
+
+.leaderboard .title{display:flex;align-items:center;justify-content:space-between}
+.chip{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,0.02)}
+
+.btc{padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));border:1px solid var(--glass-2)}
+.btc h4{margin:0 0 8px 0}
+.podium{display:flex;flex-direction:column;gap:6px}
+
+/* prompts box */
+.prompts{margin-top:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);font-size:13px;color:var(--muted)}
 
 /* responsive */
-@media (max-width:1000px){
-  .grid{grid-template-columns: repeat(2,1fr)}
-}
-@media (max-width:640px){
-  body{padding:18px}
-  .stage{padding:18px}
-  .grid{grid-template-columns:1fr}
-  header{gap:12px}
-  .logo{width:56px;height:56px;font-size:18px}
-  h1{font-size:20px}
-}
+@media(max-width:1050px){.wrap{grid-template-columns:1fr 320px}}
+@media(max-width:880px){.wrap{grid-template-columns:1fr} .schedule-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.schedule-grid{grid-template-columns:1fr}.logo{width:52px;height:52px}}
 
-/* small animation */
-.card:hover{transform: translateY(-6px);transition:transform .28s ease, box-shadow .28s ease}
-.card{transition:transform .28s ease, box-shadow .28s ease}
+/* small hover */
+.day:hover{transform:translateY(-6px);transition:transform .25s}
 
   </style>
 </head>
 <body>
-  <div class="stage">
+  <div class="wrap">
     <header>
       <div class="logo">URA</div>
       <div>
         <h1>📅 URA Battle Schedule</h1>
-        <p class="lead">EBMS-09- tournament · 4:30 PM / 6:00 PM / 8:00 PM matches</p>
+        <p class="sub">EBME-09 Schedule • matches at 4:30 PM, 6:00 PM & 8:00 PM • Stylish UI</p>
       </div>
-    </header><section class="grid">
-  <!-- Day 1 -->
-  <article class="card">
-    <h3>Day 1 <span class="badge">17/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Ayush</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Ayush 2 vs Flexxyyy</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Rocky vs N</span></li>
+    </header><main class="panel">
+  <div class="schedule-grid">
+    <!-- Day 1 -->
+    <div class="day">
+      <h3>Day 1 <span class="date">17/08/2025</span></h3>
+      <div class="matches">
+        <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Ayush</div></div>
+        <div class="match"><div class="time">6:00 PM</div><div class="vs">Ayush 2 vs Flexxyyy</div></div>
+        <div class="match"><div class="time">8:00 PM</div><div class="vs">Rocky vs N</div></div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day">
+      <h3>Day 2 <span class="date">18/08/2025</span></h3>
+      <div class="matches">
+        <div class="match"><div class="time">4:30 PM</div><div class="vs">Tiklu-G vs Bhramhose</div></div>
+        <div class="match"><div class="time">6:00 PM</div><div class="vs">Tk-Gamer vs Unknown</div></div>
+        <div class="match"><div class="time">8:00 PM</div><div class="vs">MR Khali vs Bruce Banner</div></div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day">
+      <h3>Day 3 <span class="date">19/08/2025</span></h3>
+      <div class="matches">
+        <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Flexxyyy</div></div>
+        <div class="match"><div class="time">6:00 PM</div><div class="vs">Tillu-G vs Rocky</div></div>
+        <div class="match"><div class="time">8:00 PM</div><div class="vs">Ayush vs Ayush 2</div></div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day">
+      <h3>Day 4 <span class="date">20/08/2025</span></h3>
+      <div class="matches">
+        <div class="match"><div class="time">4:30 PM</div><div class="vs">N vs Bhramhose</div></div>
+        <div class="match"><div class="time">6:00 PM</div><div class="vs">Tk-Gamer vs MR Khali</div></div>
+        <div class="match"><div class="time">8:00 PM</div><div class="vs">Unknown vs Bruce Banner</div></div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day">
+      <h3>Day 5 <span class="date">21/08/2025</span></h3>
+      <div class="matches">
+        <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Rocky</div></div>
+        <div class="match"><div class="time">6:00 PM</div><div class="vs">Ayush vs Tiklu-G</div></div>
+        <div class="match"><div class="time">8:00 PM</div><div class="vs">Ayush 2 vs N</div></div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day">
+      <h3>Day 6 <span class="date">22/08/2025</span></h3>
+      <div class="matches">
+        <div class="match"><div class="time">4:30 PM</div><div class="vs">Flexxyyy vs Bhramhose</div></div>
+        <div class="match"><div class="time">6:00 PM</div><div class="vs">Tk-Gamer vs Bruce Banner</div></div>
+        <div class="match"><div class="time">8:00 PM</div><div class="vs">Unknown vs MR Khali</div></div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="day">
+      <h3>Day 7 <span class="date">23/08/2025</span></h3>
+      <div class="matches">
+        <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Tiklu-G</div></div>
+        <div class="match"><div class="time">6:00 PM</div><div class="vs">Ayush vs N</div></div>
+        <div class="match"><div class="time">8:00 PM</div><div class="vs">Ayush 2 vs Bhramhose</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="prompts" aria-hidden="false">
+    <strong>Warning⚠️:</strong>
+    <ol>
+      <li>"URA-Networks is not responding for any mistakes."</li>
+     
+    </ol>
+  </div>
+</main>
+
+<aside>
+  <section class="panel leaderboard">
+    <div class="title"><h3 style="margin:0">🏆 URA Battle Leaderboard</h3><div class="chip">Season 1</div></div>
+    <table>
+      <thead><tr><th>Player</th><th style="text-align:right">M</th><th style="text-align:right">W</th><th style="text-align:right">L</th><th style="text-align:right">Pts</th></tr></thead>
+      <tbody>
+        <tr><td>Ayush</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Ayush 2</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Eren Yeager</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Flexxyyy</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Rocky</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>N</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Tiklu-G</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Bhramhose</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Tk-Gamer</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Unknown</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>MR Khali</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+        <tr><td>Bruce Banner</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td><td style="text-align:right">0</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel btc">
+    <h4 style="margin:0 0 8px 0">💰 Bitcoin Leaderboard</h4>
+    <div class="podium">
+      <div style="font-weight:700">🥇 Shaking — 48M$ <span style="float:right;color:var(--muted)">📈</span></div>
+      <div style="font-weight:600">🥈 RohitTradder — 20M$ <span style="float:right;color:var(--muted)">📉</span></div>
+      <div style="font-weight:600">🥉 Ghost-Rj — 17M$ <span style="float:right;color:var(--muted)">📉</span></div>
+    </div>
+  </section>
+
+  
+  <section class="panel">
+    <h4 style="margin:0 0 8px 0">URA-EBMS-09-SERVER</h4>
+    <div style="font-size:13px;color:var(--muted)">URA-Team♥️:</div>
+    <div style="margin-top:8px;font-size:13px;color:var(--muted)">
+      • "This May Be Changed Anytime Please Visit Regularly (EBMS-09)"<br>
+
+
+  <section class="commands">
+    <h2>🟠 URA Commands</h2>
+    <ul>
+      <li>To Remove Account: <br> <code>Delete My Account / Main.ppl.Uranetworks I agree and didn’t understand to URA AI</code></li>
+      <li>For Change Your Chat Name: <br> <code>//changemyname(@yourname).blichingdtites</code></li>
+      <li>For Send Money $BitCoin: <br> <code>//Transfer(Amount Of Money) to_Users(@chatusername) .urastock</code></li>
     </ul>
-  </article>
+    <p>⚠️ Please explore all features of URA App. Tournament has been started, see your schedule and play. Good Luck!</p>
+  </section>
 
-  <!-- Day 2 -->
-  <article class="card">
-    <h3>Day 2 <span class="badge">18/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Tiklu-G vs Bhramhose</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tk-Gamer vs Unknown</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">MR Khali vs Bruce Banner</span></li>
-    </ul>
-  </article>
+  <footer>
+    URA Networks © 2025 — Stay Active More 🚀
+  </footer>
+</body>
+</html>
+    </div>
+  </section>
+</aside>
 
-  <!-- Day 3 -->
-  <article class="card">
-    <h3>Day 3 <span class="badge">19/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Flexxyyy</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tillu-G vs Rocky</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Ayush vs Ayush 2</span></li>
-    </ul>
-  </article>
-
-  <!-- Day 4 -->
-  <article class="card">
-    <h3>Day 4 <span class="badge">20/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">N vs Bhramhose</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tk-Gamer vs MR Khali</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Unknown vs Bruce Banner</span></li>
-    </ul>
-  </article>
-
-  <!-- Day 5 -->
-  <article class="card">
-    <h3>Day 5 <span class="badge">21/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Rocky</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Ayush vs Tiklu-G</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Ayush 2 vs N</span></li>
-    </ul>
-  </article>
-
-  <!-- Day 6 -->
-  <article class="card">
-    <h3>Day 6 <span class="badge">22/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Flexxyyy vs Bhramhose</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tk-Gamer vs Bruce Banner</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Unknown vs MR Khali</span></li>
-    </ul>
-  </article>
-
-  <!-- Day 7 -->
-  <article class="card">
-    <h3>Day 7 <span class="badge">23/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Tiklu-G</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Ayush vs N</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Ayush 2 vs Bhramhose</span></li>
-    </ul>
-  </article>
-
-</section>
-
-  </div></body>
+  </div>
+</body>
 </html>
