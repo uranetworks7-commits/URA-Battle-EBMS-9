@@ -1,217 +1,253 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>URA Battle Schedule</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg1: #0f1020;
-      --bg2: #0b1430;
-      --accent: #7c5cff;
-      --accent-2: #00e6a8;
-      --glass: rgba(255,255,255,0.04);
-      --card: rgba(255,255,255,0.03);
-      --text: #e9eef8;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
-      color:var(--text);
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent),
-                  radial-gradient(900px 500px at 90% 90%, rgba(0,230,168,0.06), transparent),
-                  linear-gradient(180deg,var(--bg1),var(--bg2));
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:32px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }.stage{
-  width:100%;
-  max-width:1100px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:18px;
-  padding:28px;
-  box-shadow: 0 8px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-  border:1px solid rgba(255,255,255,0.04);
-  backdrop-filter: blur(6px) saturate(120%);
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EBMS-09 Moderator Feedback</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top left, #0f0f0f, #1a1a1a, #000);
+    color: #fff;
+  }
 
-header{
-  display:flex;
-  gap:18px;
-  align-items:center;
-  margin-bottom:18px;
-}
-.logo{
-  width:72px;
-  height:72px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background: linear-gradient(135deg,var(--accent),var(--accent-2));
-  box-shadow: 0 6px 24px rgba(124,92,255,0.12), 0 2px 6px rgba(0,230,168,0.06);
-  font-family: 'Orbitron', sans-serif;
-  font-weight:700;
-  color:#04121a;
-  font-size:20px;
-}
-h1{
-  margin:0;
-  font-family: 'Orbitron', sans-serif;
-  font-weight:700;
-  font-size:28px;
-  letter-spacing:0.6px;
-  color:var(--text);
-  text-shadow: 0 6px 20px rgba(0,0,0,0.6);
-}
-p.lead{
-  margin:0;
-  color: #bcd3ff;
-  opacity:0.9;
-  font-size:13px;
-}
+  /* Container */
+  .container {
+    max-width: 850px;
+    margin: 40px auto;
+    background: rgba(20, 20, 30, 0.9);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+  }
 
-.grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap:18px;
-  margin-top:20px;
-}
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    color: #00f7ff;
+    text-shadow: 0 0 12px rgba(0,247,255,0.8);
+    margin-bottom: 10px;
+  }
+  .header h2 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #aaa;
+    letter-spacing: 1px;
+  }
 
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-  border-radius:12px;
-  padding:14px;
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 8px 30px rgba(2,6,23,0.45);
-  position:relative;
-  overflow:hidden;
-  min-height:160px;
-}
-.card::after{
-  content:"";
-  position:absolute;
-  right:-40px;top:-40px;width:160px;height:160px;
-  background: radial-gradient(circle at 30% 30%, rgba(124,92,255,0.06), transparent 30%), radial-gradient(circle at 70% 70%, rgba(0,230,168,0.04), transparent 30%);
-  transform: rotate(25deg);
-  pointer-events:none;
-}
+  /* Questions */
+  .question {
+    margin-bottom: 22px;
+    padding: 15px 18px;
+    border-left: 4px solid #00f7ff;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    transition: background 0.3s;
+  }
+  .question:hover {
+    background: rgba(0,247,255,0.05);
+  }
+  .question h3 {
+    font-size: 15px;
+    color: #ffcc00;
+    margin-bottom: 10px;
+  }
+  label {
+    display: block;
+    margin: 6px 0;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ddd;
+  }
+  input[type="radio"] {
+    accent-color: #00f7ff;
+    margin-right: 6px;
+  }
 
-.card h3{margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
-.date{font-size:12px;color:#d3e3ff}
+  /* Username Input */
+  .username-box input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    margin-top: 6px;
+    outline: none;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+  }
 
-ul.matches{list-style:none;padding:8px 0 0 0;margin:0;display:flex;flex-direction:column;gap:8px}
-li.match{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
-.time{font-family: 'Orbitron', sans-serif;font-size:13px;color:#cfe9ff}
-.vs{font-weight:600}
-
-.badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.03)}
-
-/* responsive */
-@media (max-width:1000px){
-  .grid{grid-template-columns: repeat(2,1fr)}
-}
-@media (max-width:640px){
-  body{padding:18px}
-  .stage{padding:18px}
-  .grid{grid-template-columns:1fr}
-  header{gap:12px}
-  .logo{width:56px;height:56px;font-size:18px}
-  h1{font-size:20px}
-}
-
-/* small animation */
-.card:hover{transform: translateY(-6px);transition:transform .28s ease, box-shadow .28s ease}
-.card{transition:transform .28s ease, box-shadow .28s ease}
-
-  </style>
+  /* Submit Button */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #00f7ff, #ff00ff);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 20px rgba(0,247,255,0.5);
+  }
+</style>
 </head>
 <body>
-  <div class="stage">
-    <header>
-      <div class="logo">URA</div>
-      <div>
-        <h1>📅 URA Battle Schedule</h1>
-        <p class="lead">EBMS-09- tournament · 4:30 PM / 6:00 PM / 8:00 PM matches</p>
-      </div>
-    </header><section class="grid">
-  <!-- Day 1 -->
-  <article class="card">
-    <h3>Day 1 <span class="badge">17/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Ayush</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Ayush 2 vs Flexxyyy</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Rocky vs N</span></li>
-    </ul>
-  </article>
+<div class="container">
+  <div class="header">
+    <h1>EBMS-09 Feedback Form</h1>
+    <h2>Moderator Performance & Behaviour Survey</h2>
+  </div>
 
-  <!-- Day 2 -->
-  <article class="card">
-    <h3>Day 2 <span class="badge">18/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Tiklu-G vs Bhramhose</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tk-Gamer vs Unknown</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">MR Khali vs Bruce Banner</span></li>
-    </ul>
-  </article>
+ <div style="color:gold; font-weight:bold;">
+                       VLC-Member 
+</div>
+  <form action="https://getform.io/f/aejlnknb" method="POST">
 
-  <!-- Day 3 -->
-  <article class="card">
-    <h3>Day 3 <span class="badge">19/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Flexxyyy</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tillu-G vs Rocky</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Ayush vs Ayush 2</span></li>
-    </ul>
-  </article>
+    <!-- Username -->
+    <div class="question username-box">
+      <h3>Your Username (Required)</h3>
+      <input type="text" name="username" placeholder="Enter your username" required>
+    </div>
 
-  <!-- Day 4 -->
-  <article class="card">
-    <h3>Day 4 <span class="badge">20/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">N vs Bhramhose</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tk-Gamer vs MR Khali</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Unknown vs Bruce Banner</span></li>
-    </ul>
-  </article>
+    <!-- 15 Questions -->
+    <div class="question">
+      <h3>1. How well does your Moderator manage public chat?</h3>
+      <label><input type="radio" name="q1" value="Excellent" required> Excellent</label>
+      <label><input type="radio" name="q1" value="Good"> Good</label>
+      <label><input type="radio" name="q1" value="Average"> Average</label>
+      <label><input type="radio" name="q1" value="Poor"> Poor</label>
+    </div>
 
-  <!-- Day 5 -->
-  <article class="card">
-    <h3>Day 5 <span class="badge">21/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Rocky</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Ayush vs Tiklu-G</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Ayush 2 vs N</span></li>
-    </ul>
-  </article>
+    <div class="question">
+      <h3>2. Does your Moderator handle conflicts fairly?</h3>
+      <label><input type="radio" name="q2" value="Always" required> Always</label>
+      <label><input type="radio" name="q2" value="Usually"> Usually</label>
+      <label><input type="radio" name="q2" value="Sometimes"> Sometimes</label>
+      <label><input type="radio" name="q2" value="Rarely"> Rarely</label>
+    </div>
 
-  <!-- Day 6 -->
-  <article class="card">
-    <h3>Day 6 <span class="badge">22/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Flexxyyy vs Bhramhose</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Tk-Gamer vs Bruce Banner</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Unknown vs MR Khali</span></li>
-    </ul>
-  </article>
+    <div class="question">
+      <h3>3. How approachable is your Moderator when you have issues?</h3>
+      <label><input type="radio" name="q3" value="Very Approachable" required> Very Approachable</label>
+      <label><input type="radio" name="q3" value="Somewhat Approachable"> Somewhat Approachable</label>
+      <label><input type="radio" name="q3" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q3" value="Unapproachable"> Unapproachable</label>
+    </div>
 
-  <!-- Day 7 -->
-  <article class="card">
-    <h3>Day 7 <span class="badge">23/08/2025</span></h3>
-    <ul class="matches">
-      <li class="match"><span class="time">4:30 PM</span><span class="vs">Eren Yeager vs Tiklu-G</span></li>
-      <li class="match"><span class="time">6:00 PM</span><span class="vs">Ayush vs N</span></li>
-      <li class="match"><span class="time">8:00 PM</span><span class="vs">Ayush 2 vs Bhramhose</span></li>
-    </ul>
-  </article>
+    <div class="question">
+      <h3>4. How effective is your Moderator in organizing gaming tournaments?</h3>
+      <label><input type="radio" name="q4" value="Very Effective" required> Very Effective</label>
+      <label><input type="radio" name="q4" value="Effective"> Effective</label>
+      <label><input type="radio" name="q4" value="Moderate"> Moderate</label>
+      <label><input type="radio" name="q4" value="Ineffective"> Ineffective</label>
+    </div>
 
-</section>
+    <div class="question">
+      <h3>5. Does your Moderator communicate rules clearly?</h3>
+      <label><input type="radio" name="q5" value="Always" required> Always</label>
+      <label><input type="radio" name="q5" value="Often"> Often</label>
+      <label><input type="radio" name="q5" value="Sometimes"> Sometimes</label>
+      <label><input type="radio" name="q5" value="Never"> Never</label>
+    </div>
 
-  </div></body>
+    <div class="question">
+      <h3>6. How respectful is your Moderator towards members?</h3>
+      <label><input type="radio" name="q6" value="Very Respectful" required> Very Respectful</label>
+      <label><input type="radio" name="q6" value="Respectful"> Respectful</label>
+      <label><input type="radio" name="q6" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q6" value="Disrespectful"> Disrespectful</label>
+    </div>
+
+    <div class="question">
+      <h3>7. How quick is your Moderator in responding to issues?</h3>
+      <label><input type="radio" name="q7" value="Very Quick" required> Very Quick</label>
+      <label><input type="radio" name="q7" value="Fast"> Fast</label>
+      <label><input type="radio" name="q7" value="Average"> Average</label>
+      <label><input type="radio" name="q7" value="Slow"> Slow</label>
+    </div>
+
+    <div class="question">
+      <h3>8. How well does your Moderator handle redeem code spin events?</h3>
+      <label><input type="radio" name="q8" value="Excellent" required> Excellent</label>
+      <label><input type="radio" name="q8" value="Good"> Good</label>
+      <label><input type="radio" name="q8" value="Average"> Average</label>
+      <label><input type="radio" name="q8" value="Poor"> Poor</label>
+    </div>
+
+    <div class="question">
+      <h3>9. Is your Moderator fair in decision making?</h3>
+      <label><input type="radio" name="q9" value="Always" required> Always</label>
+      <label><input type="radio" name="q9" value="Usually"> Usually</label>
+      <label><input type="radio" name="q9" value="Sometimes"> Sometimes</label>
+      <label><input type="radio" name="q9" value="Rarely"> Rarely</label>
+    </div>
+
+    <div class="question">
+      <h3>10. How consistent is your Moderator in enforcing rules?</h3>
+      <label><input type="radio" name="q10" value="Very Consistent" required> Very Consistent</label>
+      <label><input type="radio" name="q10" value="Consistent"> Consistent</label>
+      <label><input type="radio" name="q10" value="Sometimes Inconsistent"> Sometimes Inconsistent</label>
+      <label><input type="radio" name="q10" value="Inconsistent"> Inconsistent</label>
+    </div>
+
+    <div class="question">
+      <h3>11. How well does your Moderator encourage fair play?</h3>
+      <label><input type="radio" name="q11" value="Strongly Encourages" required> Strongly Encourages</label>
+      <label><input type="radio" name="q11" value="Encourages"> Encourages</label>
+      <label><input type="radio" name="q11" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q11" value="Does Not Encourage"> Does Not Encourage</label>
+    </div>
+
+    <div class="question">
+      <h3>12. How supportive is your Moderator during events?</h3>
+      <label><input type="radio" name="q12" value="Very Supportive" required> Very Supportive</label>
+      <label><input type="radio" name="q12" value="Supportive"> Supportive</label>
+      <label><input type="radio" name="q12" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q12" value="Unsupportive"> Unsupportive</label>
+    </div>
+
+    <div class="question">
+      <h3>13. How polite is your Moderator in communication?</h3>
+      <label><input type="radio" name="q13" value="Very Polite" required> Very Polite</label>
+      <label><input type="radio" name="q13" value="Polite"> Polite</label>
+      <label><input type="radio" name="q13" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q13" value="Rude"> Rude</label>
+    </div>
+
+    <div class="question">
+      <h3>14. How satisfied are you with your Moderator overall?</h3>
+      <label><input type="radio" name="q14" value="Very Satisfied" required> Very Satisfied</label>
+      <label><input type="radio" name="q14" value="Satisfied"> Satisfied</label>
+      <label><input type="radio" name="q14" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q14" value="Unsatisfied"> Unsatisfied</label>
+    </div>
+
+    <div class="question">
+      <h3>15. Would you like your Moderator to continue in this role?</h3>
+      <label><input type="radio" name="q15" value="Yes, definitely" required> Yes, definitely</label>
+      <label><input type="radio" name="q15" value="Yes"> Yes</label>
+      <label><input type="radio" name="q15" value="Not Sure"> Not Sure</label>
+      <label><input type="radio" name="q15" value="No"> No</label>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="submit-btn">🚀 Submit Feedback</button>
+  </form>
+</div>
+</body>
 </html>
