@@ -323,8 +323,109 @@ footer{ margin-top:18px; text-align:center; font-size:13px; color:var(--muted) }
   .feedback-btn:hover {
     background-color: #45a049;
   }
-</style>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    /* Dark overlay */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none; /* Initially hidden */
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    /* Popup box */
+    .popup {
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px;
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Square image */
+    .popup img {
+      width: 80vw;
+      max-width: 350px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      background: #fff;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .close-btn:hover {
+      background: #f44336;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Page with Popup</h1>
+  <p>Some text is here below the popup.</p>
+
+  <!-- Overlay with popup -->
+  <div class="overlay" id="popupOverlay">
+    <div class="popup">
+      <span class="close-btn" onclick="closePopup()">❌</span>
+      <img src="win.png" alt="Popup Image">
+    </div>
+  </div>
+
+  <script>
+    // Show popup after 3 seconds
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById("popupOverlay").style.display = "flex";
+      }, 3000); // 3000ms = 3 seconds
+    });
+
+    function closePopup() {
+      document.getElementById("popupOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
 
   </aside>
 </div>
