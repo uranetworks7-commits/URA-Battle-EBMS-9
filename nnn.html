@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Action Selection</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0a0a0f, #101025);
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Animated Background */
+body::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,150,255,0.15) 0%, transparent 70%);
+    animation: rotate 35s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 1000px;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+    padding: 20px 0;
+}
+
+/* Panel Cards */
+.panel {
+    flex: 1;
+    min-width: 280px;
+    max-width: 480px;
+    background: rgba(0,0,50,0.6);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    padding: 50px 30px 40px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(0,255,255,0.3);
+    transition: all 0.5s ease;
+    box-shadow: 0 0 30px rgba(0,255,255,0.2);
+}
+
+/* Floating animation */
+.panel {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* Neon overlay */
+.panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(0,255,255,0.05);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+}
+
+.panel:hover::before {
+    background: rgba(0,255,255,0.15);
+    transform: rotate(0deg);
+}
+
+.panel:hover {
+    transform: translateY(-15px) scale(1.05);
+    border-color: #00f0ff;
+    box-shadow: 0 0 60px rgba(0,255,255,0.7);
+    background: rgba(0,0,60,0.85);
+}
+
+/* Title with gradient glow */
+.panel h2 {
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #00f0ff, #0066ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(0,240,255,0.6);
+    line-height: 1.2;
+    transition: all 0.3s ease;
+}
+
+.panel:hover h2 {
+    text-shadow: 0 0 30px rgba(0,255,255,1);
+}
+
+/* Description */
+.panel p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #aaa;
+    margin-bottom: 40px;
+    transition: color 0.3s ease;
+}
+
+.panel:hover p {
+    color: #fff;
+}
+
+/* Continue Button */
+.continue-btn {
+    padding: 16px 45px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #00f0ff, #0066ff);
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0,255,255,0.5);
+}
+
+.continue-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(0,255,255,0.8);
+    background: linear-gradient(45deg, #0066ff, #00f0ff);
+}
+
+/* Icons for each panel */
+.panel h2::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.panel:first-child h2::before {
+    background-image: url('https://img.icons8.com/ios-filled/100/00f0ff/money-transfer.png');
+}
+
+.panel:last-child h2::before {
+    background-image: url('https://img.icons8.com/ios-filled/100/00f0ff/bitcoin.png');
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="panel" onclick="window.location.href='nn.html'">
+        <h2>Transfer Money</h2>
+        <p>Send money securely and quickly using our system. Click continue to proceed with transferring funds.</p>
+        <button class="continue-btn">Continue</button>
+    </div>
+
+    <div class="panel" onclick="window.location.href='ww.html'">
+        <h2>Claim Redeem Codes with Bitcoin</h2>
+        <p>Claim your Bitcoin redeem codes easily. Click continue to redeem and check your rewards.</p>
+        <button class="continue-btn">Continue</button>
+    </div>
+</div>
+
+</body>
+</html>

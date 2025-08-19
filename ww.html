@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redeem System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .container {
+      width: 400px;
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 25px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 40px rgba(0,255,255,0.4);
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #00f7ff;
+      text-shadow: 0 0 8px #00f7ff, 0 0 15px #00aaff;
+      animation: neonPulse 2s infinite alternate;
+    }
+    .balance-box {
+      background: rgba(0,0,0,0.5);
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: inset 0 0 12px rgba(0,255,255,0.3);
+      animation: glowBox 3s infinite alternate;
+    }
+    .rate {
+      font-size: 16px;
+      color: #ffd700;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #ffdd00;
+      animation: goldenGlow 3s infinite alternate;
+    }
+    input {
+      width: 85%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      font-size: 15px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    input:focus {
+      box-shadow: 0 0 15px #00f7ff;
+      transform: scale(1.03);
+    }
+    button {
+      margin-top: 15px;
+      width: 92%;
+      padding: 14px;
+      background: linear-gradient(135deg,#00f7ff,#0072ff);
+      border: none;
+      border-radius: 14px;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: 0.4s;
+      box-shadow: 0 0 20px rgba(0,247,255,0.7);
+      animation: buttonPulse 2s infinite alternate;
+    }
+    button:hover {
+      background: linear-gradient(135deg,#0072ff,#00f7ff);
+      transform: scale(1.07);
+      box-shadow: 0 0 25px rgba(0,247,255,1);
+    }
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.4s ease;
+    }
+    .popup.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .popup-content {
+      background: rgba(20,20,20,0.95);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 0 25px #00f7ff, inset 0 0 10px rgba(0,247,255,0.3);
+      animation: popupIn 0.6s ease;
+    }
+    .popup-content h2 {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0 0 12px;
+      color: #00f7ff;
+      text-shadow: 0 0 8px #00aaff;
+      animation: neonPulse 2s infinite alternate;
+    }
+    .close-btn {
+      margin-top: 18px;
+      padding: 10px 20px;
+      background: crimson;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(220,20,60,0.7);
+    }
+    .close-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,0,80,1);
+    }
+    .progress-container {
+      width: 100%;
+      height: 22px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      margin: 15px 0;
+      overflow: hidden;
+      box-shadow: inset 0 0 15px rgba(0,247,255,0.4);
+      display: none;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg,#00f7ff,#0072ff,#00f7ff);
+      border-radius: 12px;
+      transition: width 0.2s linear;
+      animation: progressGlow 1s infinite alternate;
+    }
+    #progressPercent {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #00f7ff;
+      text-shadow: 0 0 6px #00aaff;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    @keyframes popupIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes neonPulse { from { text-shadow: 0 0 5px #00f7ff, 0 0 15px #0072ff; } to { text-shadow: 0 0 20px #00f7ff, 0 0 35px #0072ff; } }
+    @keyframes glowBox { from { box-shadow: inset 0 0 8px rgba(0,247,255,0.2); } to { box-shadow: inset 0 0 18px rgba(0,247,255,0.6); } }
+    @keyframes goldenGlow { from { text-shadow: 0 0 6px #ffdd00; } to { text-shadow: 0 0 14px #ffea00; } }
+    @keyframes buttonPulse { from { box-shadow: 0 0 12px rgba(0,247,255,0.5); } to { box-shadow: 0 0 25px rgba(0,247,255,0.9); } }
+    @keyframes progressGlow { from { box-shadow: 0 0 8px #00f7ff; } to { box-shadow: 0 0 18px #0072ff; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💎 Redeem System</h1>
+    <div class="balance-box">Balance: <span id="balance">0</span> $</div>
+    <div class="rate">Current Rate: <span id="rateValue">2000000$ = 45₹</span></div>
+
+    <input type="text" id="username" placeholder="Enter Username" />
+    <input type="number" id="amount" placeholder="Enter Redeem Amount ($)" />
+    <button onclick="redeem()">Claim</button>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2 id="popupTitle">Message</h2>
+      <p id="popupMsg">Details here...</p>
+      <div class="progress-container" id="progressBox">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p id="progressPercent"></p>
+      <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+    import { getDatabase as getDatabase2, ref as ref2, push as push2 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+    const firebaseConfig = { apiKey:"AIzaSyBpvng4Am-rhTPwSvWKxAGN2WCqBwsoAaM", authDomain:"bitcoin-fa4b2.firebaseapp.com", databaseURL:"https://bitcoin-fa4b2-default-rtdb.firebaseio.com", projectId:"bitcoin-fa4b2", storageBucket:"bitcoin-fa4b2.firebasestorage.app", messagingSenderId:"311271969444", appId:"1:311271969444:web:7fb50ae0439b9bde600c31" };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const firebaseConfig2 = { apiKey:"AIzaSyC3g6LG1FNoNFgET2zMubovKNSHpoFGh74", authDomain:"public-chat-f6a10.firebaseapp.com", databaseURL:"https://public-chat-f6a10-default-rtdb.firebaseio.com", projectId:"public-chat-f6a10", storageBucket:"public-chat-f6a10.firebasestorage.app", messagingSenderId:"646142541152", appId:"1:646142541152:web:2756cad2dcd8fe9e48f205" };
+    const app2 = initializeApp(firebaseConfig2,"secondary");
+    const db2 = getDatabase2(app2);
+
+    const DOLLAR_UNIT = 2000000; 
+    const RS_VALUE = 45;       
+    document.getElementById("rateValue").innerText = `${DOLLAR_UNIT}$ = ${RS_VALUE}₹`;
+
+    function showPopup(title,msg,showProgress=false){
+      document.getElementById("popupTitle").innerText=title;
+      document.getElementById("popupMsg").innerText=msg;
+      document.getElementById("progressPercent").innerText="";
+      const box=document.getElementById("progressBox");
+      box.style.display=showProgress?"block":"none";
+      document.getElementById("progressBar").style.width="0";
+      document.getElementById("popup").classList.add("active");
+    }
+    window.closePopup=function(){document.getElementById("popup").classList.remove("active");}
+
+    window.redeem=async function(){
+      const username=document.getElementById("username").value.trim();
+      const amount=parseFloat(document.getElementById("amount").value);
+      if(!username||isNaN(amount)||amount<=0){showPopup("⚠️ Error","Enter valid username and amount.");return;}
+
+      const userRef=ref(db,"users/"+username);
+      const snapshot=await get(userRef);
+      if(!snapshot.exists()){showPopup("❌ Error","No account found for this username.");return;}
+
+      const userData=snapshot.val();
+      let balance=userData.balance||0;
+
+      // ⏳ check last claim time
+      const now = Date.now();
+      if(userData.lastClaim){
+        const lastClaimTime = new Date(userData.lastClaim).getTime();
+        const diffDays = (now - lastClaimTime) / (1000*60*60*24);
+        if(diffDays < 7){
+          const remain = Math.ceil(7 - diffDays);
+          showPopup("⏳ Notice",`You Have Claimed For This Week , Please Try It in Next Week ${remain} day(s).`);
+          return;
+        }
+      }
+
+      if(balance<amount){showPopup("⚠️ Insufficient","Your balance is too low for this redeem.");return;}
+      if(amount!==DOLLAR_UNIT){showPopup("❌ Wrong Amount",`Please enter exactly ${DOLLAR_UNIT}$ only.`);return;}
+
+      // Show processing
+      showPopup("⏳ Processing","Please wait while we process your redeem...",true);
+      let progress=0;const bar=document.getElementById("progressBar");const percent=document.getElementById("progressPercent");
+      const interval=setInterval(()=>{progress+=(100/70);if(progress>=100){progress=100;clearInterval(interval);}bar.style.width=progress+"%";percent.innerText=Math.floor(progress)+"%";},200);
+
+      setTimeout(async()=>{
+        let newBalance=balance-amount;
+        await update(userRef,{balance:newBalance,lastClaim:new Date().toISOString()});
+        document.getElementById("balance").innerText=newBalance;
+
+        const logRef=ref2(db2,"redeemRequests");
+        await push2(logRef,{username:username,amount:amount,newBalance:newBalance,time:new Date().toISOString()});
+
+        showPopup("✅ Success",`You redeemed ( Shortly Sent On Your Mail 💌)${amount}$ for ${(amount/DOLLAR_UNIT)*RS_VALUE}₹. New Balance: ${newBalance}$`);
+      },14000);
+    }
+  </script>
+</body>
+</html>
