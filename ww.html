@@ -255,14 +255,30 @@
       const interval=setInterval(()=>{progress+=(100/70);if(progress>=100){progress=100;clearInterval(interval);}bar.style.width=progress+"%";percent.innerText=Math.floor(progress)+"%";},200);
 
       setTimeout(async()=>{
-        let newBalance=balance-amount;
+        // 🔒 SECURITY: re-check balance
+        const latestSnap = await get(userRef);
+        const latestData = latestSnap.val();
+        const latestBalance = latestData.balance || 0;
+
+        if(latestBalance !== balance){
+            clearInterval(interval); 
+            bar.style.width = "0%";
+            percent.innerText = "";
+            showPopup("❌ Failed", "Redeem failed! Your balance was changed during the process.");
+            return;
+        }
+
+        let newBalance=latestBalance-amount;
         await update(userRef,{balance:newBalance,lastClaim:new Date().toISOString()});
         document.getElementById("balance").innerText=newBalance;
 
         const logRef=ref2(db2,"redeemRequests");
         await push2(logRef,{username:username,amount:amount,newBalance:newBalance,time:new Date().toISOString()});
 
-        showPopup("✅ Success",`You redeemed ( Shortly Sent On Your Mail 💌)${amount}$ for ${(amount/DOLLAR_UNIT)*RS_VALUE}₹. New Balance: ${newBalance}$`);
+        clearInterval(interval);
+        bar.style.width = "100%";
+        percent.innerText = "100%";
+        showPopup("✅ Success",`You redeemed ( Shortly Sent On Your Mail 💌) ${amount}$ for ${(amount/DOLLAR_UNIT)*RS_VALUE}₹. New Balance: ${newBalance}$`);
       },14000);
     }
   </script>
