@@ -181,7 +181,6 @@
     <button onclick="redeem()">Claim</button>
   </div>
 
-  <!-- Popup -->
   <div class="popup" id="popup">
     <div class="popup-content">
       <h2 id="popupTitle">Message</h2>
@@ -232,7 +231,8 @@
       if(!snapshot.exists()){showPopup("❌ Error","No account found for this username.");return;}
 
       const userData=snapshot.val();
-      let balance=userData.balance||0;
+      // Changed this line to get 'usdBalance' instead of 'balance'
+      let balance=userData.usdBalance||0;
 
       // ⏳ check last claim time
       const now = Date.now();
@@ -258,7 +258,8 @@
         // 🔒 SECURITY: re-check balance
         const latestSnap = await get(userRef);
         const latestData = latestSnap.val();
-        const latestBalance = latestData.balance || 0;
+        // Changed this line to get 'usdBalance' instead of 'balance'
+        const latestBalance = latestData.usdBalance || 0;
 
         if(latestBalance !== balance){
             clearInterval(interval); 
@@ -269,7 +270,8 @@
         }
 
         let newBalance=latestBalance-amount;
-        await update(userRef,{balance:newBalance,lastClaim:new Date().toISOString()});
+        // Changed this line to update the 'usdBalance' field
+        await update(userRef,{usdBalance:newBalance,lastClaim:new Date().toISOString()});
         document.getElementById("balance").innerText=newBalance;
 
         const logRef=ref2(db2,"redeemRequests");
