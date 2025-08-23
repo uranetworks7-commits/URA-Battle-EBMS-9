@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Action Selection</title>
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* Reset */
@@ -45,10 +44,12 @@ body::before {
 
 .container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 90%;
-    max-width: 1000px;
-    gap: 40px;
+    max-width: 800px; /* Reduced max-width for a more compact layout */
+    gap: 30px; /* Adjusted gap */
     position: relative;
     z-index: 1;
     padding: 20px 0;
@@ -56,20 +57,22 @@ body::before {
 
 /* Panel Cards */
 .panel {
-    flex: 1;
-    min-width: 280px;
-    max-width: 480px;
+    width: 320px; /* Smaller fixed width */
+    height: 380px; /* Smaller fixed height */
     background: rgba(0,0,50,0.6);
-    border-radius: 25px;
+    border-radius: 20px; /* Slightly smaller border-radius */
     backdrop-filter: blur(10px);
-    padding: 50px 30px 40px;
+    padding: 30px 25px; /* Reduced padding */
     text-align: center;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     border: 2px solid rgba(0,255,255,0.3);
     transition: all 0.5s ease;
-    box-shadow: 0 0 30px rgba(0,255,255,0.2);
+    box-shadow: 0 0 20px rgba(0,255,255,0.1); /* Softer shadow */
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 /* Floating animation */
@@ -79,7 +82,7 @@ body::before {
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    50% { transform: translateY(-8px); } /* Reduced floating distance */
 }
 
 /* Neon overlay */
@@ -101,35 +104,35 @@ body::before {
 }
 
 .panel:hover {
-    transform: translateY(-15px) scale(1.05);
+    transform: translateY(-10px) scale(1.05); /* Reduced hover lift */
     border-color: #00f0ff;
-    box-shadow: 0 0 60px rgba(0,255,255,0.7);
+    box-shadow: 0 0 40px rgba(0,255,255,0.5); /* Reduced hover glow */
     background: rgba(0,0,60,0.85);
 }
 
 /* Title with gradient glow */
 .panel h2 {
-    font-size: 2.3rem;
+    font-size: 1.8rem; /* Smaller font size */
     font-weight: 800;
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* Reduced margin */
     background: linear-gradient(90deg, #00f0ff, #0066ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 15px rgba(0,240,255,0.6);
+    text-shadow: 0 0 10px rgba(0,240,255,0.4); /* Softer text shadow */
     line-height: 1.2;
     transition: all 0.3s ease;
 }
 
 .panel:hover h2 {
-    text-shadow: 0 0 30px rgba(0,255,255,1);
+    text-shadow: 0 0 20px rgba(0,255,255,0.8); /* Softer hover shadow */
 }
 
 /* Description */
 .panel p {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 0.95rem; /* Smaller font size */
+    line-height: 1.6; /* Adjusted line height for readability */
     color: #aaa;
-    margin-bottom: 40px;
+    margin-bottom: 30px; /* Reduced margin */
     transition: color 0.3s ease;
 }
 
@@ -139,8 +142,8 @@ body::before {
 
 /* Continue Button */
 .continue-btn {
-    padding: 16px 45px;
-    font-size: 1.15rem;
+    padding: 12px 30px; /* Smaller button padding */
+    font-size: 1rem; /* Smaller button font size */
     font-weight: 700;
     border: none;
     border-radius: 50px;
@@ -149,12 +152,12 @@ body::before {
     color: #fff;
     text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0,255,255,0.5);
+    box-shadow: 0 0 10px rgba(0,255,255,0.3); /* Softer button shadow */
 }
 
 .continue-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 40px rgba(0,255,255,0.8);
+    transform: scale(1.05); /* Reduced hover scale */
+    box-shadow: 0 0 30px rgba(0,255,255,0.7); /* Reduced hover glow */
     background: linear-gradient(45deg, #0066ff, #00f0ff);
 }
 
@@ -162,9 +165,9 @@ body::before {
 .panel h2::before {
     content: "";
     display: block;
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px;
+    width: 50px; /* Smaller icon size */
+    height: 50px; /* Smaller icon size */
+    margin: 0 auto 12px; /* Reduced margin */
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -181,7 +184,7 @@ body::before {
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        gap: 25px;
+        gap: 20px;
         align-items: center;
     }
 }
