@@ -1,707 +1,496 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>URA Battle — Schedule & Leaderboards</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg1:#050510; --bg2:#0c1224;
-  --glass: rgba(255,255,255,0.05);
-  --accent:#8a5cff; --accent2:#00f6c9; --accent3:#ff2e97;
-  --muted:#a8bddc; --card:#101a33;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  min-height:100vh;
-  background: radial-gradient(900px 500px at 15% 10%, rgba(138,92,255,0.07), transparent),
-              radial-gradient(800px 500px at 90% 90%, rgba(0,246,201,0.06), transparent),
-              linear-gradient(180deg,var(--bg1),var(--bg2));
-  font-family: Inter, Poppins, sans-serif;
-  color:#eaf4ff;
-  padding:28px;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URA Battle | EBMS-09 Server</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0e1a;
+      --bg-card: #121827;
+      --border-blue: #0077ff;
+      --text-light: #e0eafb;
+      --text-blue: #39b5ff;
+      --glow-blue: rgba(0, 119, 255, 0.7);
+    }
+    
+    @keyframes move-bg {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 100%; }
+    }
+    
+    body {
+      background: #0a0e1a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230a0e1a"/><circle cx="50" cy="50" r="10" fill="%231a2a4b" opacity="0.5"/><circle cx="150" cy="150" r="10" fill="%231a2a4b" opacity="0.5"/><circle cx="100" cy="100" r="15" fill="%231a2a4b" opacity="0.5"/><path d="M0,0 L200,0 L200,200 L0,200 Z" fill="none" stroke="%231a2a4b" stroke-width="1"/></svg>');
+      animation: move-bg 30s linear infinite;
+      color: var(--text-light);
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .header-left {
+      text-align: left;
+    }
+    
+    .header-left h1 {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: var(--text-blue);
+      text-shadow: 0 0 15px var(--glow-blue);
+    }
+    
+    .header-left .subtitle {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #92a1c0;
+    }
+    
+    .btn-top {
+      background: linear-gradient(90deg, #ffd700, #ffa500);
+      color: #1a1a1a;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+    
+    .btn-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin: 0 auto;
+    }
+    
+    @media (min-width: 1024px) {
+      .container {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+    
+    .main-content, .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .panel {
+      background: rgba(18, 24, 39, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      padding: 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    .panel:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .panel-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--text-blue);
+      border-bottom: 2px solid var(--border-blue);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .match-card {
+      background: linear-gradient(135deg, #0d121f, #18223d);
+      border: 1px solid var(--border-blue);
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .match-time {
+      font-size: 0.9rem;
+      color: #a8bddc;
+      margin-bottom: 10px;
+    }
+    
+    .match-time span {
+      color: var(--text-blue);
+      font-weight: bold;
+    }
+    
+    .players {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .player-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+    
+    .vs-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 0 10px;
+    }
+    
+    .player-name.eren { color: #ff6347; }
+    .player-name.rocky { color: #4682b4; }
+    .player-name.ayush { color: #32cd32; }
+    .player-name.bhramhose { color: #ffa500; }
+    
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    
+    .leaderboard-table th, .leaderboard-table td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .leaderboard-table th {
+      background-color: #0d121f;
+      color: var(--text-blue);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    .leaderboard-table tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .gold-row { background-color: #ffd70030; font-weight: bold; color: #ffd700; }
+    .silver-row { background-color: #c0c0c030; font-weight: bold; color: #c0c0c0; }
+    .bronze-row { background-color: #cd7f3230; font-weight: bold; color: #cd7f32; }
+    
+    .btc-panel .info-line {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    
+    .btc-panel .highlight {
+      color: gold;
+      font-weight: bold;
+    }
+    
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-main {
+      background: linear-gradient(90deg, #39b5ff, #0077ff);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
+    }
+    
+    .btn-main:hover {
+      background: linear-gradient(90deg, #0077ff, #39b5ff);
+      transform: translateY(-2px);
+    }
+    
+    .btn-gold {
+      background: linear-gradient(90deg, #ffd700, #ffa500);
+      color: #1a1a1a;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+    
+    .btn-gold:hover {
+      background: linear-gradient(90deg, #ffa500, #ffd700);
+      transform: translateY(-2px);
+    }
+    
+    .commands-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .commands-list li {
+      background-color: #0d121f;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--border-blue);
+    }
+    
+    .commands-list b {
+      color: var(--text-blue);
+    }
+    
+    .commands-list code {
+      background-color: #05080f;
+      color: #a8bddc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .commands-notice {
+      font-size: 0.8rem;
+      color: #7d8ea6;
+      margin-top: 15px;
+    }
+    
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .popup-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-blue);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transform: scale(0.8);
+      opacity: 0;
+      animation: popup-in 0.3s forwards;
+      width: min(90%, 400px);
+    }
+    
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #ff4747;
+    }
+    
+    @keyframes popup-in {
+      to { transform: scale(1); opacity: 1; }
+    }
 
-/* Wrapper */
-.wrap{
-  max-width:1300px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr 360px;
-  gap:24px;
-  align-items:start;
-}
+    footer {
+      margin-top: 40px;
+      color: #7d8ea6;
+      text-align: center;
+    }
 
-/* Header */
-header{
-  grid-column:1/-1;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:14px;
-}
-.logo{
-  width:70px; height:70px;
-  border-radius:16px;
-  display:grid; place-items:center;
-  font-family:Orbitron; font-weight:700;
-  font-size:20px;
-  color:#fff;
-  background: linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));
-  box-shadow: 0 0 20px rgba(138,92,255,0.5);
-}
-h1{ font-family:Orbitron; font-size:28px; text-shadow:0 0 10px rgba(124,92,255,0.6);}
-p.sub{ color:var(--muted); font-size:14px; margin-top:4px;}
+    /* System Notice Pop-up */
+    .system-notice-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
 
-/* Panels */
-.panel{
-  background: rgba(255,255,255,0.03);
-  border-radius:16px;
-  padding:20px;
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 8px 35px rgba(2,6,23,0.6);
-  backdrop-filter: blur(12px);
-}
+    .system-notice-content {
+      background: #0d121f;
+      border: 2px solid #39b5ff;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 20px rgba(57, 181, 255, 0.5);
+      width: min(90%, 400px);
+      transform: scale(0.8);
+      opacity: 0;
+      animation: popup-in 0.3s forwards;
+    }
+    
+    .system-notice-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #fff;
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+    }
 
-/* Schedule */
-.schedule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.day{
-  background: rgba(255,255,255,0.02);
-  padding:16px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.05);
-  transition: all .3s ease;
-  position:relative;
-  overflow:hidden;
-}
-.day:hover{
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:0 0 20px rgba(124,92,255,0.3);
-}
-.day h3{ font-size:16px; display:flex; justify-content:space-between; align-items:center }
-.date{ font-size:13px; color:var(--muted) }
-.matches{ margin-top:12px; display:flex; flex-direction:column; gap:10px }
-.match{
-  display:flex; gap:14px; align-items:center;
-  padding:10px 12px;
-  border-radius:10px;
-  background: linear-gradient(90deg,rgba(124,92,255,0.08),rgba(0,230,168,0.05));
-  border:1px solid rgba(255,255,255,0.05);
-  font-size:14px;
-}
-.time{ font-family:Orbitron; font-size:13px; min-width:70px; color:var(--accent2) }
-.vs{ font-weight:600 }
-
-/* Prompts */
-.prompts{
-  margin-top:16px;
-  background: rgba(255,255,255,0.02);
-  padding:14px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.05);
-  font-size:13px;
-  color:var(--muted);
-}
-
-/* Right Column */
-aside{ display:flex; flex-direction:column; gap:18px }
-
-/* Leaderboard */
-table{ width:100%; border-collapse:collapse; margin-top:10px }
-thead th{
-  font-size:13px; padding:10px 8px;
-  color:var(--accent2);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  text-transform:uppercase;
-}
-tbody tr{ transition: background .2s }
-tbody tr:hover{ background:rgba(124,92,255,0.07) }
-tbody td{ padding:10px 8px; border-bottom:1px solid rgba(255,255,255,0.03) }
-
-.title{ display:flex; align-items:center; justify-content:space-between }
-.chip{
-  background: linear-gradient(135deg,var(--accent),var(--accent2));
-  padding:6px 12px; border-radius:999px;
-  font-weight:600; font-size:13px; color:#04121a;
-}
-
-/* BTC Leaderboard */
-.btc h4{ font-size:15px; margin-bottom:10px }
-.podium div{ padding:6px 0; border-bottom:1px dashed rgba(255,255,255,0.05) }
-
-/* Commands */
-.commands{ margin-top:14px }
-.commands h2{ font-family:Orbitron; font-size:18px; margin-bottom:8px; color:var(--accent3) }
-.commands ul{ list-style:none; font-size:13px; color:var(--muted); padding-left:0 }
-.commands li{ margin:6px 0; padding:6px 10px; border-left:3px solid var(--accent2); background:rgba(255,255,255,0.02); border-radius:6px }
-
-/* Footer */
-footer{ margin-top:18px; text-align:center; font-size:13px; color:var(--muted) }
-
-/* Responsive */
-@media(max-width:1050px){ .wrap{grid-template-columns:1fr 320px} }
-@media(max-width:880px){ .wrap{grid-template-columns:1fr} .schedule-grid{grid-template-columns:repeat(2,1fr)} }
-@media(max-width:560px){ .schedule-grid{grid-template-columns:1fr} .logo{width:60px;height:60px} h1{font-size:22px} }
-</style>
+    .system-notice-close:hover {
+        opacity: 1;
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="logo">URA</div>
-    <div>
-      <h1>📅 URA Battle Schedule</h1>
-      <p class="sub">EBMS-09 • Matches: 4:30 PM | 6:00 PM | 8:00 PM • URA Team ♥️</p>
+  <header class="header">
+    <div class="header-left">
+      <h1>URA BATTLE</h1>
+      <p class="subtitle">EBMS-09 SERVER </p>
     </div>
+    <a href="previous.html" class="btn btn-top">View Previous Match</a>
   </header>
 
-  <!-- Schedule Panel -->
-  <main class="panel">
-    <div class="schedule-grid">
-
-      <!-- Day 1 -->
-      <div class="day">
-        <h3>Day ✅<span class="date">17/08/2025</span></h3>
-        <div class="matches">
-          <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Ayush</div></div>
-          <div class="match"><div class="time">6:00 PM</div><div class="vs">Ayush 2 vs Flexxyyy</div></div>
-          <div class="match"><div class="time">6:30 PM</div><div class="vs">Rocky vs N</div></div>
+  <div class="container">
+    <div class="main-content">
+      <div class="panel">
+        <h2 class="panel-title">🗓️ Upcoming Matches (Selection) </h2>
+        <div class="match-card">
+          <div class="match-time"><span>4:30 PM | AUGUST 25</span></div>
+          <div class="players">
+            <span class="player-name eren">EREN YEAGER</span>
+            <span class="vs-text">VS</span>
+            <span class="player-name rocky">ROCKY</span>
+          </div>
+        </div>
+        <div class="match-card">
+          <div class="match-time"><span>7:00 PM | AUGUST 25</span></div>
+          <div class="players">
+            <span class="player-name ayush">AYUSH 2</span>
+            <span class="vs-text">VS</span>
+            <span class="player-name bhramhose">BHRAMHOSE</span>
+          </div>
         </div>
       </div>
 
-      <!-- Day 2 -->
-      <div class="day">
-        <h3>Day 2  ✅<span class="date">18/08/2025</span></h3>
-        <div class="matches">
-          <div class="match"><div class="time">4:30 PM</div><div class="vs">Tiklu-G vs Bhramhose</div></div>
-          <div class="match"><div class="time">6:00 PM</div><div class="vs">Tk-Gamer vs Unknown</div></div>
-          <div class="match"><div class="time">8:00 PM</div><div class="vs">MR Khali vs Bruce Banner</div></div>
-        </div>
+      <div class="panel">
+        <h2 class="panel-title">🤖 URA AI Commands</h2>
+        <ul class="commands-list">
+          <li><b>Remove Account:</b> <code>Delete My Account / Main.ppl.Uranetworks</code></li>
+          <li><b>Change Chat Name:</b> <code>//changemyname(@yourname)/bgs</code></li>
+          <li><b>Send Money:</b> <code>//Transfer(Amount) to_Users(@chatusername)/bgs</code></li>
+        </ul>
+        <p class="commands-notice">⚠️ Use these commands with URA AI, not Utkarsh AI.</p>
       </div>
-
-      <!-- Day 3 -->
-      <div class="day">
-        <h3>Day 3 ✅<span class="date">19/08/2025</span></h3>
-        <div class="matches">
-          <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Flexxyyy</div></div>
-          <div class="match"><div class="time">6:00 PM</div><div class="vs">Tillu-G vs Rocky</div></div>
-          <div class="match"><div class="time">8:00 PM</div><div class="vs">Ayush vs Ayush 2</div></div>
-        </div>
-      </div>
-
-      <!-- Day 4 -->
-      <div class="day">
-        <h3>Day 4 ✅<span class="date">20/08/2025</span></h3>
-        <div class="matches">
-          <div class="match"><div class="time">4:30 PM</div><div class="vs">N vs Bhramhose</div></div>
-          <div class="match"><div class="time">6:00 PM</div><div class="vs">Tk-Gamer vs MR Khali</div></div>
-          <div class="match"><div class="time">8:00 PM</div><div class="vs">Ayush vs Bruce Banner</div></div>
-        </div>
-      </div>
-
-      <!-- Day 5 -->
-      <div class="day">
-        <h3>Day 5 ✅<span class="date">21/08/2025</span></h3>
-        <div class="matches">
-          <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Rocky</div></div>
-          <div class="match"><div class="time">6:00 PM</div><div class="vs">Unknown vs Tiklu-G</div></div>
-          <div class="match"><div class="time">8:00 PM</div><div class="vs">Ayush 2 vs N</div></div>
-        </div>
-      </div>
-
-      <!-- Day 6 -->
-      <div class="day">
-        <h3>Day 6 ✅<span class="date">22/08/2025</span></h3>
-        <div class="matches">
-          <div class="match"><div class="time">4:30 PM</div><div class="vs">Flexxyyy vs Bruce Banner</div></div>
-          <div class="match"><div class="time">6:00 PM</div><div class="vs">Tk-Gamer vs Bhramhose</div></div>
-          <div class="match"><div class="time">8:00 PM</div><div class="vs">Unknown vs MR Khali</div></div>
-        </div>
-      </div>
-
-<!-- Day 7 -->  <div class="day">  
-  <h3>Day 7 ✅<span class="date">23/08/2025</span></h3>  
-  <div class="matches">  
-    <!-- 4:30 PM Matches -->  
-    <div class="match"><div class="time">4:30 PM</div><div class="vs">Eren Yeager vs Ayush 2</div></div>  
-    <div class="match"><div class="time">4:30 PM</div><div class="vs">Mr Khali vs Rocky</div></div>  <!-- 6:00 PM Matches -->  
-<div class="match"><div class="time">6:00 PM</div><div class="vs">Ayush vs N</div></div>  
-<div class="match"><div class="time">6:00 PM</div><div class="vs">Tk-Gamer vs Unknown</div></div>  
-
-<!-- 8:00 PM Matches -->  
-<div class="match"><div class="time">8:00 PM</div><div class="vs">Tiklu-G vs Bhramhose</div></div>  
-<div class="match"><div class="time">8:00 PM</div><div class="vs">Flexxyyy vs Bruce Banner</div></div>
-
-  </div>  
-</div>  
-    </div>  
-<!-- Legendary Day 8 -->
-<div class="legendary-day">
-  <div class="chip">🏆 Grand Crown Stage (GCS) 🏆</div>
-  <h3>✨ Day 8 (Today✅) <span class="date">24/08/2025</span> ✨</h3>
-
-  <div class="matches">
-    <div class="match gold">
-      <div class="time">⏰ 4:30 PM</div>
-      <div class="vs">⚔️ Eren Yeager <span>vs</span> N ⚔️</div>
-    </div>
-    <div class="match gold">
-      <div class="time">⏰ 4:30 PM</div>
-      <div class="vs">⚡ Ayush <span>vs</span> Flexxyyyy ⚡</div>
     </div>
 
-    <div class="match fire">
-      <div class="time">⏰ 6:00 PM</div>
-      <div class="vs">🔥 Mr Khali <span>vs</span> Ayush 2 🔥</div>
-    </div>
-    <div class="match fire">
-      <div class="time">⏰ 6:00 PM</div>
-      <div class="vs">🌪️ Bhramhose <span>vs</span> Unknown 🌪️</div>
-    </div>
+    <div class="sidebar">
+      <div class="panel leaderboard-panel">
+        <h2 class="panel-title">🏆 URA Leaderboard</h2>
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>M</th>
+              <th>W</th>
+              <th>L</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="gold-row"><td>1</td><td>Eren Yeager</td><td>5</td><td>5</td><td>0</td><td>12</td></tr>
+            <tr class="bronze-row"><td>2</td><td>Bhramhose</td><td>5</td><td>4</td><td>1</td><td>10</td></tr>
+            <tr class="silver-row"><td>3</td><td>Ayush 2</td><td>5</td><td>3</td><td>0</td><td>8.5</td></tr>
+            <tr class="silver-row"><td>4</td><td>Rocky</td><td>5</td><td>2</td><td>2</td><td>8</td></tr>
+            <tr><td>5</td><td>N</td><td>5</td><td>3</td><td>2</td><td>6</td></tr>
+            <tr><td>6</td><td>Tk-Gamer</td><td>5</td><td>2</td><td>3</td><td>6</td></tr>
+            <tr><td>7</td><td>Bruce Banner</td><td>5</td><td>3</td><td>1</td><td>5.5</td></tr>
+            <tr><td>8</td><td>Unknown</td><td>5</td><td>2</td><td>3</td><td>4</td></tr>
+            <tr><td>9</td><td>MR Khali</td><td>5</td><td>1</td><td>4</td><td>2</td></tr>
+            <tr><td>10</td><td>Ayush</td><td>5</td><td>1</td><td>1</td><td>1.5</td></tr>
+            <tr><td>11</td><td>Tiklu-G</td><td>5</td><td>1</td><td>3</td><td>1.5</td></tr>
+            <tr><td>12</td><td>Flexxyyy</td><td>5</td><td>0</td><td>2</td><td>-1.5</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="match royal">
-      <div class="time">⏰ 8:00 PM</div>
-      <div class="vs">⚡ Tiklu-G <span>vs</span> Tk-Gamer ⚡</div>
-    </div>
-    <div class="match royal">
-      <div class="time">⏰ 8:00 PM</div>
-      <div class="vs">🛡️ Rocky <span>vs</span> Bruce Banner 🛡️</div>
+      <div class="panel btc-panel">
+        <h2 class="panel-title">💰 Bitcoin Leaderboard</h2>
+        <div class="info-line"><span class="highlight">🥇 @Eren Yeager</span> — N/A</div>
+        <div class="info-line"><span class="highlight">🥈 @Evil Viper</span> — N/A</div>
+        <div class="info-line"><span class="highlight">🥉 @Ayush</span> — N/A</div>
+        <div class="info-line" style="margin-top: 15px;">Note: Bitcoin value changes anytime.</div>
+        
+        <div class="action-buttons">
+          <a href="nnn.html" class="btn btn-gold">Money & Redeem Codes</a>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<style>
-/* Container */
-.legendary-day {
-  background: linear-gradient(145deg, #0b0b12, #1c1c2c);
-  padding: 15px;
-  margin: 20px auto;
-  border-radius: 15px;
-  max-width: 700px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid gold;
-  box-shadow: 0 0 35px rgba(255,215,0,0.6);
-}
+  <footer>URA Networks © 2025 — Stay Active 🚀</footer>
 
-/* Smoke animation behind table */
-.legendary-day::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: url('https://i.ibb.co/3rvqvVz/smoke.png') repeat;
-  background-size: cover;
-  opacity: 0.1;
-  animation: smoke 12s linear infinite;
-  z-index: 0;
-}
-
-/* Chip */
-.legendary-day .chip {
-  display: inline-block;
-  padding: 10px 22px;
-  margin-bottom: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 25px;
-  background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
-  color: #fff;
-  border: 2px solid #DAA520;
-  box-shadow: 0 0 15px rgba(255,215,0,0.9);
-  animation: shine 2.5s infinite linear;
-  z-index: 2;
-  position: relative;
-}
-
-/* Header */
-.legendary-day h3 {
-  font-size: 22px;
-  margin-bottom: 12px;
-  color: #FFD700;
-  text-shadow: 0 0 8px rgba(255,215,0,0.7);
-  z-index: 2;
-  position: relative;
-}
-.legendary-day .date { font-size: 14px; color: #fff; }
-
-/* Matches table format */
-.legendary-day .matches {
-  display: grid;
-  gap: 6px;
-  z-index: 2;
-  position: relative;
-}
-
-.legendary-day .match {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-  box-shadow: 0 0 8px rgba(255,215,0,0.4);
-  position: relative;
-  overflow: hidden;
-  transition: 0.3s all;
-}
-
-.legendary-day .match::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.25), rgba(255,255,255,0));
-  transform: skewX(-25deg);
-  transition: 0.3s;
-}
-.legendary-day .match:hover::after { left: 100%; }
-
-/* Time & VS text */
-.legendary-day .time { font-size: 12px; color: #FFD700; }
-.legendary-day .vs span { color: #FFD700; font-size: 14px; }
-
-/* Row color themes */
-.legendary-day .match.gold { background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,165,0,0.15)); border: 1px solid #FFD700; }
-.legendary-day .match.fire { background: linear-gradient(135deg, rgba(255,69,0,0.15), rgba(255,99,71,0.15)); border: 1px solid #FF4500; }
-.legendary-day .match.royal { background: linear-gradient(135deg, rgba(65,105,225,0.15), rgba(106,90,205,0.15)); border: 1px solid #4169E1; }
-
-/* Animations */
-@keyframes shine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-@keyframes smoke {
-  0% { transform: translateX(0) translateY(0) rotate(0deg); }
-  100% { transform: translateX(-50px) translateY(-20px) rotate(360deg); }
-}
-</style>
-    </div>
-
-    <div class="prompts">
-      <strong>⚠️ Notice:</strong>
-      <ol>
-        <li> URA-Networks is not responsible for any  Mistakes.</li>
-        <li>   Please check daily for updates.</li>
-      </ol>
-    </div>
-  </main>
-
-  <!-- Sidebar -->
-  <aside>
-
-
-<!-- Leaderboard -->
-<section class="panel leaderboard">
-  <div class="title">
-    <h3>🏆 URA Leaderboard</h3>
-    <div class="chip">Season 1</div>
-  </div>
-
-  <table class="leaderboard-table">
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Player</th>
-        <th>M</th>
-        <th>W</th>
-        <th>L</th>
-        <th>Pts</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="gold">
-        <td>1</td><td>⭐Eren Yeager</td><td>5</td><td>5</td><td>0</td><td>12</td>
-      </tr>
-      <tr class="silver">
-        <td>2</td><td>N</td><td>5</td><td>3</td><td>2</td><td>6</td>
-      </tr>
-      <tr class="bronze">
-        <td>3</td><td>Bhramhose</td><td>5</td><td>4</td><td>1</td><td>10</td>
-      </tr>
-      <tr><td>4</td><td>Bruce Banner</td><td>5</td><td>3</td><td>1</td><td>5.5</td></tr>
-      <tr><td>5</td><td>Ayush 2</td><td>5</td><td>3</td><td>0</td><td>8.5</td></tr>
-      <tr><td>6</td><td>Unknown</td><td>5</td><td>2</td><td>3</td><td>4</td></tr>
-      <tr><td>7</td><td>Rocky</td><td>5</td><td>2</td><td>2</td><td>8</td></tr>
-      <tr><td>8</td><td>Ayush</td><td>5</td><td>1</td><td>1</td><td>1.5</td></tr>
-      <tr><td>9</td><td>MR Khali</td><td>5</td><td>1</td><td>4</td><td>2</td></tr>
-      <tr><td>10</td><td>Tk-Gamer</td><td>5</td><td>2</td><td>3</td><td>6</td></tr>
-      <tr><td>11</td><td>Tiklu-G</td><td>5</td><td>1</td><td>3</td><td>1.5</td></tr>
-      <tr><td>12</td><td>Flexxyyy</td><td>5</td><td>0</td><td>2</td><td>-1.5</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<style>
-/* Scoped only to leaderboard table */
-.leaderboard .leaderboard-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  overflow: hidden;
-  animation: fadeIn 1s ease-in;
-}
-
-.leaderboard .leaderboard-table th {
-  background: linear-gradient(135deg, #003366, #0055aa);
-  color: #fff;
-  padding: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  border-bottom: 3px solid #fff;
-  transition: transform 0.3s;
-}
-
-.leaderboard .leaderboard-table th:hover {
-  transform: scale(1.05);
-}
-
-.leaderboard .leaderboard-table td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.leaderboard .leaderboard-table tbody tr:hover td {
-  background: rgba(0,85,170,0.1);
-  transform: scale(1.02);
-}
-
-/* Special rows */
-.leaderboard .gold { background: #ffd700; font-weight: bold; }
-.leaderboard .silver { background: #c0c0c0; font-weight: bold; }
-.leaderboard .bronze { background: #cd7f32; font-weight: bold; }
-
-/* Zebra effect for normal rows */
-.leaderboard .leaderboard-table tbody tr:nth-child(even):not(.gold):not(.silver):not(.bronze) {
-  background: rgba(0,0,0,0.03);
-}
-
-/* Shine animation */
-@keyframes shine {
-  0% { background-position: -200px; }
-  100% { background-position: 200px; }
-}
-
-.leaderboard .leaderboard-table tbody tr.gold,
-.leaderboard .leaderboard-table tbody tr.silver,
-.leaderboard .leaderboard-table tbody tr.bronze {
-  background-image: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
-  background-size: 200% 100%;
-  animation: shine 2s linear infinite;
-}
-
-/* Fade in animation for table */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px);}
-  to { opacity: 1; transform: translateY(0);}
-}
-
-/* Leaderboard header */
-.leaderboard .title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.leaderboard .chip {
-  background: #ff6600;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-</style>
-
-    <!-- BTC Leaderboard -->
-    <section class="panel btc">
-      <h4>💰 Bitcoin Leaderboard All Server.</h4>
-      <div class="podium">
-        <div>🥇 @Eren Yeager--N/A <span style="float:right;color:var(--muted)">📈</span></div>
-        <div>🥈 @Evil Viper— N/A <span style="float:right;color:var(--muted)">📉</span></div>
-        <div>🥉 @Ayush — N/A <span style="float:right;color:var(--muted)">📉</span></div>
- <div style="color:gold; font-weight:bold;">
-  𝐍𝐨𝐭𝐞:- 𝐂𝐮𝐫𝐫𝐞𝐧𝐭 𝐕𝐚𝐥𝐮𝐞 𝐎𝐟 𝐁𝐢𝐭𝐜𝐨𝐢𝐧 N/A
-   𝐌$ = ₹N/A(⚠️ 𝐥𝐢𝐦𝐢𝐭:- 𝐎𝐧𝐥𝐲 𝐎𝐧𝐞 𝐓𝐢𝐦𝐞 / 𝐖𝐞𝐞𝐤 )
-</div>
- <div style="color:teal; font-weight:bold;">
-  (𝓑𝒾𝓉𝒸𝑜𝒾𝓃 𝒱𝒶𝓁𝓊𝑒 𝒞𝒽𝒶𝓃𝑔𝑒 𝒜𝓃𝓎𝓉𝒾𝓂𝑒  )
-</div>
-</div>
- <!doctype html>
-<html lang="en">
-<head>
-<style>
-.feedback-btn {
-  background: linear-gradient(45deg, gold, darkgoldenrod);
-  color: black;
-  border: none;
-  padding: 14px 28px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  animation: pulse 2s infinite; /* Continuous pulsing */
-}
-
-.feedback-btn::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: rotate(45deg);
-  transition: all 0.5s ease;
-  pointer-events: none;
-}
-
-.feedback-btn:hover::after {
-  top: -60%;
-  left: -60%;
-}
-
-.feedback-btn:hover {
-  background: linear-gradient(45deg, darkgoldenrod, gold);
-  color: white;
-  transform: scale(1.05);
-}
-
-/* Pulse animation */
-@keyframes pulse {
-  0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
-  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 1); }
-  100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
-}
-</style>
-
-<div class="top-center">
-  <button class="feedback-btn" onclick="window.location.href='nnn.html'">
-    Money 💰 And Redeem Codes 
-  </button>
-</div>
-
-    <!-- Commands -->
-    <section class="panel commands">
-      <h2>🟠 URA Ai Commands </h2>
-      <ul>
-        <li><b>Remove Account:</b> <code>Delete My Account / Main.ppl.Uranetworks</code></li>
-        <li><b>Change Chat  Name:</b> <code>//changemyname(@yourname)/bgs</code></li>
-        <li><b>Send Money:</b> <code>//Transfer(Amount) to_Users(@chatusername)/bgs</code></li>
-      </ul>
-      <p style="margin-top:8px;color:var(--muted)">⚠️ Explore all features. Tournament ongoing. Good luck! , Please Sent This Command to URA Ai (Not Utkarsh Ai )</p>
-    </section>
-
-    <footer>URA Networks © 2025 — Stay Active 🚀</footer>
-
-
-<style>
-  .top-center {
-    display: flex;
-    justify-content: center; /* center horizo*/
-    margin-top: 20px; /* space from top */
-  }
-
-  .feedback-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .feedback-btn:hover {
-    background-color: #45a049;
-  }
-
-
-
-  <h1>Thankyou For Visiting ♥️</h1>
-  
-
-  <!-- Overlay with popup -->
-  <div class="overlay" id="popupOverlay">
-    <div class="popup">
-      <span class="close-btn" onclick="closePopup()">❌</span>
-      <img src="win.png" alt="Popup Image">
+  <div id="systemNoticePopup" class="system-notice-overlay">
+    <div class="system-notice-content">
+      <span id="closeNoticeButton" class="system-notice-close">❌</span>
+      <h3>System Notice ⚠️</h3>
+      <p>We are facing delay in updates. Our team is working on it.</p>
     </div>
   </div>
 
   <script>
-    // Show popup after 3 seconds
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById("popupOverlay").style.display = "flex";
-      }, 3000); // 3000ms = 3 seconds
+    document.addEventListener('DOMContentLoaded', () => {
+      const systemNoticePopup = document.getElementById('systemNoticePopup');
+      const closeNoticeButton = document.getElementById('closeNoticeButton');
+      
+      // Show pop-up after 2 seconds
+      setTimeout(() => {
+        if (systemNoticePopup) {
+          systemNoticePopup.style.display = 'flex';
+        }
+      }, 2000); // 2000ms = 2 seconds
+
+      // Hide pop-up when the close button is clicked
+      if (closeNoticeButton) {
+        closeNoticeButton.addEventListener('click', () => {
+          if (systemNoticePopup) {
+            systemNoticePopup.style.display = 'none';
+          }
+        });
+      }
     });
-
-    function closePopup() {
-      document.getElementById("popupOverlay").style.display = "none";
-    }
   </script>
-
-</body>
-</html>
-
-  </aside>
-</div>
-
-<!-- ===== URA Alert (added, non-breaking) ===== -->
-<style>
-.ura-backdrop{ position:fixed; inset:0; background:rgba(2,6,23,.55); backdrop-filter: blur(4px); opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s ease; z-index:9998; }
-.ura-backdrop.show{ opacity:1; visibility:visible; }
-.ura-alert{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%) scale(.86); background:linear-gradient(180deg, rgba(16,26,51,.98), rgba(23,36,70,.98)); border:1px solid rgba(255,255,255,.08); box-shadow:0 10px 40px rgba(0,0,0,.55); border-radius:16px; padding:18px 20px; width:min(92vw,420px); color:#eaf4ff; text-align:center; z-index:9999; opacity:0; visibility:hidden; transition:transform .25s ease, opacity .25s ease, visibility .25s ease; }
-.ura-alert.show{ opacity:1; visibility:visible; transform:translate(-50%,-50%) scale(1); }
-.ura-alert__icon{ font-size:26px; margin-bottom:8px; }
-.ura-alert__title{ font-family: Orbitron, Poppins, sans-serif; font-size:18px; margin-bottom:6px; color:#fdd835; letter-spacing:.3px; }
-.ura-alert__text{ font-size:14px; color:#a8bddc; line-height:1.5; }
-.ura-alert__btn{ margin-top:14px; padding:10px 16px; border:0; border-radius:10px; font-weight:700; cursor:pointer; background:linear-gradient(135deg,#8a5cff,#00f6c9); color:#04121a; box-shadow:0 6px 16px rgba(138,92,255,.35); }
-.ura-alert__btn:active{ transform:translateY(1px); }
-</style>
-
-<div id="uraBackdrop" class="ura-backdrop"></div>
-<div id="uraAlert" class="ura-alert" role="dialog" aria-live="polite" aria-label="System Notice">
-  <div class="ura-alert__icon">⚠️</div>
-  <div class="ura-alert__title">System Notice</div>
-  <div class="ura-alert__text">We are facing issues with calculation and evaluation delays. Our team is working on it.</div>
-  <button class="ura-alert__btn" onclick="(function(){document.getElementById('uraAlert').classList.remove('show');document.getElementById('uraBackdrop').classList.remove('show');})();">OK</button>
-</div>
-
-<script>
-(function(){
-  function uraShow(){ 
-    var a=document.getElementById('uraAlert'); 
-    var b=document.getElementById('uraBackdrop'); 
-    if(a&&b){ a.classList.add('show'); b.classList.add('show'); }
-  }
-  window.addEventListener('load', function(){ setTimeout(uraShow, 3000); });
-})();
-</script>
-<!-- ===== /URA Alert ===== -->
-
 </body>
 </html>
