@@ -174,7 +174,7 @@
   <div class="container">
     <h1>💎 Redeem System</h1>
     <div class="balance-box">Balance: <span id="balance">0</span> $</div>
-    <div class="rate">Current Rate: <span id="rateValue">25000000$ = 45₹</span></div>
+    <div class="rate">Current Rate: <span id="rateValue">771430000$ = 50₹</span></div>
 
     <input type="text" id="username" placeholder="Enter Username" />
     <input type="number" id="amount" placeholder="Enter Redeem Amount ($)" />
@@ -206,8 +206,8 @@
     const app2 = initializeApp(firebaseConfig2,"secondary");
     const db2 = getDatabase2(app2);
 
-    const DOLLAR_UNIT = 25000000; 
-    const RS_VALUE = 45;       
+    const DOLLAR_UNIT = 771430000; 
+    const RS_VALUE = 50;       
     document.getElementById("rateValue").innerText = `${DOLLAR_UNIT}$ = ${RS_VALUE}₹`;
 
     function showPopup(title,msg,showProgress=false){
