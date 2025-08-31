@@ -92,7 +92,7 @@
     
     @media (min-width: 1024px) {
       .container {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr;
       }
     }
     
@@ -371,6 +371,61 @@
     .system-notice-close:hover {
         opacity: 1;
     }
+
+    /* URA-Battle T-2 Final Button Styles */
+    .ura-panel-button {
+      position: relative;
+      padding: 15px 40px;
+      font-size: 1.25em;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+      background: linear-gradient(45deg, #4c2c77, #774c99);
+      border: none;
+      display: inline-block;
+      margin-top: 30px; /* Add some space below the panels */
+    }
+
+    .ura-panel-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(45deg, #5e3a8f, #8c63b2);
+    }
+
+    .ura-panel-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .ura-panel-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.5s ease-out;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      z-index: 1;
+    }
+
+    .ura-panel-button:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .button-text {
+      position: relative;
+      z-index: 2;
+    }
   </style>
 </head>
 <body>
@@ -379,31 +434,11 @@
       <h1>URA BATTLE</h1>
       <p class="subtitle">EBMS-09 SERVER </p>
     </div>
-    <a href="previous.html" class="btn btn-top">View Previous Match</a>
+    <a href="server.html.html" class="btn btn-top">URA Battle T2 Final</a>
   </header>
 
   <div class="container">
     <div class="main-content">
-      <div class="panel">
-        <h2 class="panel-title">🗓️ Upcoming Matches (Selection) </h2>
-        <div class="match-card">
-          <div class="match-time"><span>4:30 PM | AUGUST 28</span></div>
-          <div class="players">
-            <span class="player-name eren">EREN YEAGER</span>
-            <span class="vs-text">VS</span>
-            <span class="player-name rocky">ROCKY</span>
-          </div>
-        </div>
-        <div class="match-card">
-          <div class="match-time"><span>7:00 PM | AUGUST 28</span></div>
-          <div class="players">
-            <span class="player-name ayush">AYUSH 2</span>
-            <span class="vs-text">VS</span>
-            <span class="player-name bhramhose">BHRAMHOSE</span>
-          </div>
-        </div>
-      </div>
-
       <div class="panel">
         <h2 class="panel-title">🤖 URA AI Commands</h2>
         <ul class="commands-list">
@@ -413,46 +448,13 @@
         </ul>
         <p class="commands-notice">⚠️ Use these commands with URA AI, not Utkarsh AI.</p>
       </div>
-    </div>
-
-    <div class="sidebar">
-      <div class="panel leaderboard-panel">
-        <h2 class="panel-title">🏆 URA Leaderboard</h2>
-        <table class="leaderboard-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player</th>
-              <th>M</th>
-              <th>W</th>
-              <th>L</th>
-              <th>Pts</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="gold-row"><td>1</td><td>Eren Yeager</td><td>5</td><td>5</td><td>0</td><td>12</td></tr>
-            <tr class="bronze-row"><td>2</td><td>Bhramhose</td><td>5</td><td>4</td><td>1</td><td>10</td></tr>
-            <tr class="silver-row"><td>3</td><td>Ayush 2</td><td>5</td><td>3</td><td>0</td><td>8.5</td></tr>
-            <tr class="silver-row"><td>4</td><td>Rocky</td><td>5</td><td>2</td><td>2</td><td>8</td></tr>
-            <tr><td>5</td><td>N</td><td>5</td><td>3</td><td>2</td><td>6</td></tr>
-            <tr><td>6</td><td>Tk-Gamer</td><td>5</td><td>2</td><td>3</td><td>6</td></tr>
-            <tr><td>7</td><td>Bruce Banner</td><td>5</td><td>3</td><td>1</td><td>5.5</td></tr>
-            <tr><td>8</td><td>Unknown</td><td>5</td><td>2</td><td>3</td><td>4</td></tr>
-            <tr><td>9</td><td>MR Khali</td><td>5</td><td>1</td><td>4</td><td>2</td></tr>
-            <tr><td>10</td><td>Ayush</td><td>5</td><td>1</td><td>1</td><td>1.5</td></tr>
-            <tr><td>11</td><td>Tiklu-G</td><td>5</td><td>1</td><td>3</td><td>1.5</td></tr>
-            <tr><td>12</td><td>Flexxyyy</td><td>5</td><td>0</td><td>2</td><td>-1.5</td></tr>
-          </tbody>
-        </table>
-      </div>
-
       <div class="panel btc-panel">
         <h2 class="panel-title">💰 Bitcoin Leaderboard</h2>
-        <div class="info-line"><span class="highlight">🥇 @Raj-RT</span> — 1B$</div>
-        <div class="info-line"><span class="highlight">🥈 @Evil Viper</span> — 800M$</div>
-        <div class="info-line"><span class="highlight">🥉 @Bruce Banner</span> — 771M$</div>
+        <div class="info-line"><span class="highlight">🥇 @Daku_x-RT</span> — 6.9M$</div>
+        <div class="info-line"><span class="highlight">🥈 @Evil Viper</span> — 4.6M$</div>
+        <div class="info-line"><span class="highlight">🥉 @Max-Rt</span> — 1M$</div>
         <div class="info-line" style="margin-top: 15px;">Note: Bitcoin value changes anytime.</div>
-    <div class="info-line" style="margin-top: 15px;">𝓒𝓾𝓻𝓻𝓮𝓷𝓽 𝓥𝓪𝓵𝓾𝓮 𝓲𝓼 :- ~771𝓜 $.</div>
+        <div class="info-line" style="margin-top: 15px;">𝓒𝓾𝓻𝓻𝓮𝓷𝓽 𝓥𝓪𝓵𝓾𝓮 𝓲𝓼 :- ~7𝓜 $=25Rs.(All Servers)</div>
         
         <div class="action-buttons">
           <a href="nnn.html" class="btn btn-gold">Money & Redeem Codes</a>
@@ -460,6 +462,10 @@
       </div>
     </div>
   </div>
+
+  <a href="privious.html" class="ura-panel-button">
+    <span class="button-text">View Privious Matches</span>
+  </a>
 
   <footer>URA Networks © 2025 — Stay Active 🚀</footer>
 
