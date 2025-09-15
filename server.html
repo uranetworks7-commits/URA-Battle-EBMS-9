@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>URA Battle T2 Final</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Russo+One&display=swap');
@@ -37,7 +38,7 @@
     h1 {
       text-align: center;
       font-size: 3.5rem;
-      margin: 20px 0; /* Shorter spacing */
+      margin: 20px 0;
       color: var(--cyan-neon-blue);
       text-shadow: 0 0 20px var(--purple-pink-neon), 0 0 40px var(--purple-glow);
       animation: glow 3s infinite alternate;
@@ -56,16 +57,15 @@
       font-size: 1.2rem;
       color: var(--cyan-neon-blue);
       text-shadow: 0 0 10px var(--cyan-neon-blue);
-      margin-bottom: 15px; /* Shorter spacing */
+      margin-bottom: 15px;
     }
 
-    /* Styles for the Schedule section */
     .schedule {
       width: 90%;
       max-width: 900px;
-      margin: 15px auto; /* Shorter spacing */
+      margin: 15px auto;
       border-radius: 12px;
-      padding: 15px; /* Shorter spacing */
+      padding: 15px;
       background: var(--glass-background-light);
       border: 1px solid var(--purple-pink-neon);
       box-shadow: 0 8px 32px 0 var(--glass-shadow);
@@ -74,13 +74,13 @@
       animation: pulsate 2s infinite alternate;
     }
 
-    /* Styles for the Leaderboard section */
     .leaderboard-container {
       width: 90%;
       max-width: 1100px;
-      margin: 15px auto; /* Shorter spacing */
+      margin: 15px auto;
       padding: 0;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
       background: transparent;
       box-shadow: none;
       border: none;
@@ -93,7 +93,7 @@
     }
 
     .day {
-      margin-bottom: 20px; /* Shorter spacing */
+      margin-bottom: 20px;
     }
 
     .day h2 {
@@ -112,7 +112,7 @@
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       border-radius: 10px;
-      padding: 20px; /* New: Taller rows for a longer table look */
+      padding: 20px;
       margin: 10px 0;
       font-size: 1.2rem;
       display: flex;
@@ -135,7 +135,6 @@
     }
 
     .players {
-      /* New: Gradient effect for player names */
       color: transparent;
       background-image: linear-gradient(to right, var(--orange-color), var(--cream-color));
       -webkit-background-clip: text;
@@ -144,13 +143,13 @@
       font-family: 'Russo One', sans-serif;
       position: relative;
       transition: color 0.3s;
+      text-align: right;
     }
     
     .players:hover {
-      /* Reverts to a solid color on hover */
       color: var(--cyan-neon-blue);
       text-shadow: 0 0 10px var(--cyan-neon-blue);
-      background-image: none; /* Removes the gradient on hover */
+      background-image: none;
       -webkit-background-clip: unset;
       -webkit-text-fill-color: unset;
     }
@@ -158,7 +157,7 @@
     .leaderboard {
       width: 100%;
       border-collapse: collapse;
-      font-size: 1.1rem;
+      font-size: 0.9rem; /* Further reduced font size */
       border-radius: 12px;
       overflow: hidden;
       background: var(--glass-background-light);
@@ -168,6 +167,7 @@
       -webkit-backdrop-filter: blur(10px);
       position: relative;
       z-index: 1;
+      white-space: nowrap;
     }
 
     .leaderboard::before {
@@ -190,7 +190,7 @@
     }
 
     .leaderboard th, .leaderboard td {
-      padding: 20px; /* New: Taller rows for a longer table look */
+      padding: 5px; /* Significantly reduced padding */
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -199,7 +199,7 @@
       background: rgba(138, 43, 226, 0.4);
       color: var(--white-silver);
       text-shadow: 0 0 10px #000;
-      font-size: 1.2rem;
+      font-size: 1rem; /* Reduced font size */
       letter-spacing: 1px;
     }
 
@@ -212,7 +212,6 @@
       transition: 0.3s;
     }
 
-    /* Leaderboard highlights for top 3 */
     .leaderboard tr.gold {
       background: rgba(255, 215, 0, 0.1);
       box-shadow: inset 0 0 20px var(--gold-yellow);
@@ -234,10 +233,79 @@
     footer {
       text-align: center;
       padding: 20px;
-      margin-top: 15px; /* Shorter spacing */
+      margin-top: 15px;
       font-size: 1rem;
       color: var(--white-silver);
       text-shadow: 0 0 5px #000;
+    }
+    
+    /* --- MEDIA QUERIES FOR MOBILE OPTIMIZATION --- */
+    @media screen and (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin: 15px 0;
+      }
+
+      .sub-title {
+        font-size: 1rem;
+      }
+
+      .day h2 {
+        font-size: 1.5rem;
+      }
+
+      .schedule, .leaderboard-container {
+        width: 95%;
+        margin: 10px auto;
+        padding: 10px;
+      }
+
+      .match {
+        padding: 15px;
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .time {
+        margin-bottom: 5px;
+      }
+      
+      .players {
+        text-align: left;
+      }
+
+      .leaderboard th, .leaderboard td {
+        padding: 4px; /* Minimal padding for mobile */
+        font-size: 0.7rem; /* Even smaller font size for mobile */
+      }
+      
+      footer {
+        font-size: 0.8rem;
+        padding: 15px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .sub-title {
+            font-size: 0.9rem;
+        }
+
+        .day h2 {
+            font-size: 1.2rem;
+        }
+        
+        .match {
+            padding: 10px;
+        }
     }
   </style>
 </head>
@@ -339,5 +407,5 @@
   </footer>
 
 </body>
-  </html>
-  
+                                          </html>
+                                          
