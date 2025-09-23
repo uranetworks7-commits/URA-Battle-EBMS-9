@@ -18,6 +18,12 @@
       --orange-color: #ffa500; /* New: Orange for player name gradient */
       --silver: #c0c0c0;
       --bronze: #cd7f32;
+      /* New colors for the requested theme */
+      --emerald-red: #cc0000;
+      --emerald-green-glow: #00ff00;
+      --golden-yellow: #ffd700;
+      --electric-blue: #00ffff;
+
 
       /* Glassmorphism variables */
       --glass-background-light: rgba(255, 255, 255, 0.15);
@@ -154,10 +160,69 @@
       -webkit-text-fill-color: unset;
     }
 
+    /* Updated Semifinal Match Styling */
+    .semifinal-match {
+        background: rgba(204, 0, 0, 0.2); /* Emerald Red with transparency */
+        border: 1px solid var(--emerald-red);
+        box-shadow: 0 0 20px var(--emerald-green-glow); /* Green glow effect */
+        animation: pulsate-red-green 1.5s infinite alternate;
+        font-size: 1.3rem;
+    }
+
+    .semifinal-match .time, .semifinal-match .players {
+        color: var(--emerald-red);
+        text-shadow: 0 0 10px var(--emerald-green-glow);
+        background-image: linear-gradient(to right, var(--emerald-green-glow), var(--emerald-red));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    @keyframes pulsate-red-green {
+        from { box-shadow: 0 0 15px var(--emerald-red), inset 0 0 8px var(--emerald-green-glow); }
+        to { box-shadow: 0 0 35px var(--emerald-green-glow), inset 0 0 18px var(--emerald-red); }
+    }
+
+
+    /* Updated Final Match Styling */
+    .final-match {
+        background: rgba(255, 215, 0, 0.15); /* Golden Yellow with transparency */
+        border-color: var(--golden-yellow);
+        box-shadow: 0 0 25px var(--golden-yellow), inset 0 0 15px var(--golden-yellow);
+        animation: pulsate-golden 1.5s infinite alternate, electric-pulse 0.5s infinite;
+    }
+
+    .final-match .time, .final-match .players {
+        color: var(--golden-yellow);
+        text-shadow: 0 0 10px var(--electric-blue);
+        background-image: linear-gradient(to right, var(--golden-yellow), var(--electric-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    @keyframes pulsate-golden {
+        from { box-shadow: 0 0 15px var(--golden-yellow), inset 0 0 8px var(--electric-blue); }
+        to { box-shadow: 0 0 40px var(--electric-blue), inset 0 0 20px var(--golden-yellow); }
+    }
+
+    @keyframes electric-pulse {
+        0%, 100% {
+            border-color: var(--golden-yellow);
+            transform: scale(1);
+        }
+        50% {
+            border-color: var(--electric-blue);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px var(--electric-blue), inset 0 0 10px var(--golden-yellow);
+        }
+    }
+
+
     .leaderboard {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem; /* Further reduced font size */
+      font-size: 0.7rem; /* Significantly reduced font size */
       border-radius: 12px;
       overflow: hidden;
       background: var(--glass-background-light);
@@ -190,7 +255,7 @@
     }
 
     .leaderboard th, .leaderboard td {
-      padding: 5px; /* Significantly reduced padding */
+      padding: 2px; /* Very small padding */
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -199,7 +264,7 @@
       background: rgba(138, 43, 226, 0.4);
       color: var(--white-silver);
       text-shadow: 0 0 10px #000;
-      font-size: 1rem; /* Reduced font size */
+      font-size: 0.8rem; /* Reduced font size */
       letter-spacing: 1px;
     }
 
@@ -228,6 +293,17 @@
       background: rgba(205, 127, 50, 0.1);
       box-shadow: inset 0 0 20px var(--bronze);
       transition: background 0.5s, box-shadow 0.5s;
+    }
+    
+    .leaderboard tr.qualified {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: inset 0 0 15px var(--cyan-neon-blue);
+    }
+
+    .leaderboard td.status-qualified {
+      color: var(--cyan-neon-blue);
+      font-weight: bold;
+      text-shadow: 0 0 5px var(--cyan-neon-blue);
     }
 
     footer {
@@ -280,8 +356,8 @@
       }
 
       .leaderboard th, .leaderboard td {
-        padding: 4px; /* Minimal padding for mobile */
-        font-size: 0.7rem; /* Even smaller font size for mobile */
+        padding: 2px; /* Minimal padding for mobile */
+        font-size: 0.6rem; /* Even smaller font size for mobile */
       }
       
       footer {
@@ -365,11 +441,23 @@
 
     <div class="day">
       <h2>Day 7 – 23 Sep 2025</h2>
-      <div class="match"><span class="time">2:30 PM</span> <span class="players">Ayush 2 vs Dark-Satya yt</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Ayush 2 vs Dark-Satya yt</span></div>
       <div class="match"><span class="time">4:30 PM</span> <span class="players">Shadow_King vs Mr.Legend</span></div>
       <div class="match"><span class="time">6:00 PM</span> <span class="players">Thunder_Saurav vs Shadow_King</span></div>
       <div class="match"><span class="time">8:00 PM</span> <span class="players">Indian Ladka vs Mayank</span></div>
     </div>
+    
+    <div class="day">
+      <h2>Semifinals – 25 Sep 2025</h2>
+      <div class="match semifinal-match"><span class="time">4:30 PM</span> <span class="players">Eren Yeager vs Harsh rai</span></div>
+      <div class="match semifinal-match"><span class="time">6:30 PM</span> <span class="players">Raj vs Venom</span></div>
+    </div>
+    
+    <div class="day">
+      <h2>Finals – 27 Sep 2025</h2>
+      <div class="match final-match"><span class="time">8:00 PM</span> <span class="players">Winner Semifinal 1 vs Winner Semifinal 2</span></div>
+    </div>
+
   </div>
 
   <div class="leaderboard-container">
@@ -381,38 +469,32 @@
           <th>Wins</th>
           <th>Losses</th>
           <th>Points</th>
+          <th>Status</th>
         </tr>
       </thead>
-    <tbody>
-  <!-- Gold -->
-  <tr class="gold"><td>Raj</td><td>2</td><td>2</td><td>0</td><td>4</td></tr>
-  <!-- Silver -->
-  <tr class="silver"><td>Venom</td><td>2</td><td>2</td><td>0</td><td>4</td></tr>
-  <!-- Bronze -->
-  <tr class="bronze"><td>Harsh rai</td><td>2</td><td>2</td><td>0</td><td>4</td></tr>
-
-  <tr><td>Mr.Harry</td><td>2</td><td>2</td><td>0</td><td>4</td></tr>
-  <tr><td>Eren Yeager</td><td>2</td><td>2</td><td>0</td><td>4</td></tr>
-  
-  <tr><td>Alpha_Akash</td><td>2</td><td>1</td><td>1</td><td>2</td></tr>
-  <tr><td>Dark-Satya yt</td><td>2</td><td>1</td><td>1</td><td>2</td></tr>
-  <tr><td>Ayush 2</td><td>2</td><td>1</td><td>1</td><td>2</td></tr>
-  
-  <tr><td>Shadow_King</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-  <tr><td>Indian Ladka</td><td>2</td><td>0</td><td>2</td><td>0</td></tr>
-  <tr><td>Mr.Legend</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-  <tr><td>Thunder_Saurav</td><td>2</td><td>0</td><td>2</td><td>0</td></tr>
-  <tr><td>Mayank</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-  <tr><td>Radhi</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-</tbody>
+      <tbody>
+        <tr class="qualified"><td>Eren Yeager</td><td>4</td><td>4</td><td>0</td><td>8</td><td class="status-qualified">QUALIFIED</td></tr>
+        <tr class="qualified"><td>Raj</td><td>4</td><td>4</td><td>0</td><td>8</td><td class="status-qualified">QUALIFIED</td></tr>
+        <tr class="qualified"><td>Venom</td><td>4</td><td>3</td><td>1</td><td>6</td><td class="status-qualified">QUALIFIED</td></tr>
+        <tr class="qualified"><td>Harsh rai</td><td>4</td><td>3</td><td>1</td><td>6</td><td class="status-qualified">QUALIFIED</td></tr>
+        <tr><td>Mr.Harry</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Dark-Satya yt</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Ayush 2</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Shadow_King</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Indian Ladka</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Mr.Legend</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Alpha_Akash</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
+        <tr><td>Thunder_Saurav</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
+        <tr><td>Radhi</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
+        <tr><td>Mayank</td><td>4</td><td>0</td><td>4</td><td>0</td><td>Eliminated</td></tr>
+      </tbody>
     </table>
   </div>
 
   <footer>
-     ⚔ Powered by URA Networks  Team ⚔ • URA-Battle Tournament 
+     ⚔ Powered by URA Networks Team ⚔ • URA-Battle Tournament 
   </footer>
 
 </body>
-                                          </html>
-
-                                                                                                                    
+                                                                                        </html>
+                                                                                        
