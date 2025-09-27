@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URA Battle T2 Final</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Russo+One&display=swap');
+
+    :root {
+      /* New color palette based on user request */
+      --cyan-neon-blue: #00ffff;
+      --gold-yellow: #ffd700;
+      --white-silver: #fff;
+      --purple-pink-neon: #ff1493; /* Deep Pink */
+      --purple-glow: #8a2be2; /* BlueViolet for purple tone */
+      --cream-color: #fffdd0; /* Cream for player names */
+      --orange-color: #ffa500; /* New: Orange for player name gradient */
+      --silver: #c0c0c0;
+      --bronze: #cd7f32;
+      /* New colors for the requested theme */
+      --emerald-red: #cc0000;
+      --emerald-green-glow: #00ff00;
+      --golden-yellow: #ffd700;
+      --electric-blue: #00ffff;
+
+
+      /* Glassmorphism variables */
+      --glass-background-light: rgba(255, 255, 255, 0.15);
+      --glass-background-medium: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --glass-shadow: rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--white-silver);
+      overflow-x: hidden;
+      background: url('https://files.catbox.moe/6n16q4.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3.5rem;
+      margin: 20px 0;
+      color: var(--cyan-neon-blue);
+      text-shadow: 0 0 20px var(--purple-pink-neon), 0 0 40px var(--purple-glow);
+      animation: glow 3s infinite alternate;
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 15px var(--purple-pink-neon), 0 0 30px var(--purple-glow); }
+      to { text-shadow: 0 0 30px var(--purple-glow), 0 0 60px var(--purple-pink-neon); }
+    }
+
+    .sub-title {
+      text-align: center;
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.2rem;
+      color: var(--cyan-neon-blue);
+      text-shadow: 0 0 10px var(--cyan-neon-blue);
+      margin-bottom: 15px;
+    }
+
+    .schedule {
+      width: 90%;
+      max-width: 900px;
+      margin: 15px auto;
+      border-radius: 12px;
+      padding: 15px;
+      background: var(--glass-background-light);
+      border: 1px solid var(--purple-pink-neon);
+      box-shadow: 0 8px 32px 0 var(--glass-shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      animation: pulsate 2s infinite alternate;
+    }
+
+    .leaderboard-container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 15px auto;
+      padding: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      animation: none;
+    }
+    
+    @keyframes pulsate {
+      from { box-shadow: 0 0 15px var(--purple-pink-neon), inset 0 0 8px var(--purple-glow); }
+      to { box-shadow: 0 0 25px var(--purple-pink-neon), inset 0 0 12px var(--purple-glow); }
+    }
+
+    .day {
+      margin-bottom: 20px;
+    }
+
+    .day h2 {
+      font-size: 1.8rem;
+      color: var(--cyan-neon-blue);
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px var(--cyan-neon-blue);
+      border-bottom: 2px solid var(--cyan-neon-blue);
+      padding-bottom: 5px;
+    }
+
+    .match {
+      background: var(--glass-background-medium);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 10px 0 var(--glass-shadow);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 10px 0;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .match:hover {
+      transform: scale(1.03);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 20px var(--cyan-neon-blue), 0 8px 20px 0 var(--glass-shadow);
+    }
+
+    .time {
+      color: var(--gold-yellow);
+      font-weight: bold;
+      text-shadow: 0 0 5px var(--gold-yellow);
+    }
+
+    .players {
+      color: transparent;
+      background-image: linear-gradient(to right, var(--orange-color), var(--cream-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: 'Russo One', sans-serif;
+      position: relative;
+      transition: color 0.3s;
+      text-align: right;
+    }
+    
+    .players:hover {
+      color: var(--cyan-neon-blue);
+      text-shadow: 0 0 10px var(--cyan-neon-blue);
+      background-image: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+    }
+
+    /* Updated Semifinal Match Styling */
+    .semifinal-match {
+        background: rgba(204, 0, 0, 0.2); /* Emerald Red with transparency */
+        border: 1px solid var(--emerald-red);
+        box-shadow: 0 0 20px var(--emerald-green-glow); /* Green glow effect */
+        animation: pulsate-red-green 1.5s infinite alternate;
+        font-size: 1.3rem;
+        position: relative;
+        display: flex; /* Ensure inner elements are laid out properly */
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .semifinal-match .time, .semifinal-match .players {
+        color: var(--emerald-red);
+        text-shadow: 0 0 10px var(--emerald-green-glow);
+        background-image: linear-gradient(to right, var(--emerald-green-glow), var(--emerald-red));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    @keyframes pulsate-red-green {
+        from { box-shadow: 0 0 15px var(--emerald-red), inset 0 0 8px var(--emerald-green-glow); }
+        to { box-shadow: 0 0 35px var(--emerald-green-glow), inset 0 0 18px var(--emerald-red); }
+    }
+
+
+    /* Updated Final Match Styling */
+    .final-match {
+        background: rgba(255, 215, 0, 0.15); /* Golden Yellow with transparency */
+        border-color: var(--golden-yellow);
+        box-shadow: 0 0 25px var(--golden-yellow), inset 0 0 15px var(--golden-yellow);
+        animation: pulsate-golden 1.5s infinite alternate, electric-pulse 0.5s infinite;
+    }
+
+    .final-match .time, .final-match .players {
+        color: var(--golden-yellow);
+        text-shadow: 0 0 10px var(--electric-blue);
+        background-image: linear-gradient(to right, var(--golden-yellow), var(--electric-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    @keyframes pulsate-golden {
+        from { box-shadow: 0 0 15px var(--golden-yellow), inset 0 0 8px var(--electric-blue); }
+        to { box-shadow: 0 0 40px var(--electric-blue), inset 0 0 20px var(--golden-yellow); }
+    }
+
+    @keyframes electric-pulse {
+        0%, 100% {
+            border-color: var(--golden-yellow);
+            transform: scale(1);
+        }
+        50% {
+            border-color: var(--electric-blue);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px var(--electric-blue), inset 0 0 10px var(--golden-yellow);
+        }
+    }
+
+
+    .leaderboard {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.7rem; /* Significantly reduced font size */
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--glass-background-light);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--glass-shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .leaderboard::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+      background-size: 40px 40px;
+      animation: shimmering 10s linear infinite;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    @keyframes shimmering {
+      from { background-position: 0 0; }
+      to { background-position: -400px 0; }
+    }
+
+    .leaderboard th, .leaderboard td {
+      padding: 2px; /* Very small padding */
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .leaderboard th {
+      background: rgba(138, 43, 226, 0.4);
+      color: var(--white-silver);
+      text-shadow: 0 0 10px #000;
+      font-size: 0.8rem; /* Reduced font size */
+      letter-spacing: 1px;
+    }
+
+    .leaderboard tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .leaderboard tr:hover {
+      background: rgba(255, 20, 147, 0.2);
+      transition: 0.3s;
+    }
+
+    .leaderboard tr.gold {
+      background: rgba(255, 215, 0, 0.1);
+      box-shadow: inset 0 0 20px var(--gold-yellow);
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+
+    .leaderboard tr.silver {
+      background: rgba(192, 192, 192, 0.1);
+      box-shadow: inset 0 0 20px var(--silver);
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+
+    .leaderboard tr.bronze {
+      background: rgba(205, 127, 50, 0.1);
+      box-shadow: inset 0 0 20px var(--bronze);
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+    
+    .leaderboard tr.qualified {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: inset 0 0 15px var(--cyan-neon-blue);
+    }
+
+    .leaderboard td.status-qualified {
+      color: var(--cyan-neon-blue);
+      font-weight: bold;
+      text-shadow: 0 0 5px var(--cyan-neon-blue);
+    }
+
+    /* New styles for the Golden Inbox button */
+    .inbox-button {
+      padding: 8px 15px;
+      font-family: 'Russo One', sans-serif;
+      font-size: 0.8rem;
+      color: var(--white-silver);
+      background: linear-gradient(to right, var(--gold-yellow), var(--orange-color));
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-shadow: 0 0 5px #000;
+      box-shadow: 0 0 15px var(--gold-yellow);
+      transition: all 0.3s ease;
+      animation: pulsate-golden 2s infinite alternate;
+    }
+
+    .inbox-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px var(--gold-yellow);
+    }
+
+    /* New styles for the pop-up modal */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      padding-top: 50px;
+    }
+
+    .modal-content {
+      background: var(--glass-background-light);
+      border: 1px solid var(--purple-pink-neon);
+      box-shadow: 0 8px 32px 0 var(--glass-shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 400px;
+      position: relative;
+      text-align: center;
+      animation: modal-fadein 0.5s;
+    }
+
+    @keyframes modal-fadein {
+      from {opacity: 0; transform: translateY(-50px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .modal-content p {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.2rem;
+      color: var(--cyan-neon-blue);
+      text-shadow: 0 0 10px var(--cyan-neon-blue);
+    }
+
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+      color: var(--purple-pink-neon);
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 15px;
+      font-size: 1rem;
+      color: var(--white-silver);
+      text-shadow: 0 0 5px #000;
+    }
+    
+    /* --- MEDIA QUERIES FOR MOBILE OPTIMIZATION --- */
+    @media screen and (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin: 15px 0;
+      }
+
+      .sub-title {
+        font-size: 1rem;
+      }
+
+      .day h2 {
+        font-size: 1.5rem;
+      }
+
+      .schedule, .leaderboard-container {
+        width: 95%;
+        margin: 10px auto;
+        padding: 10px;
+      }
+
+      .match {
+        padding: 15px;
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .time {
+        margin-bottom: 5px;
+      }
+      
+      .players {
+        text-align: left;
+      }
+
+      .leaderboard th, .leaderboard td {
+        padding: 2px; /* Minimal padding for mobile */
+        font-size: 0.6rem; /* Even smaller font size for mobile */
+      }
+      
+      .inbox-button {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+      
+      footer {
+        font-size: 0.8rem;
+        padding: 15px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .sub-title {
+            font-size: 0.9rem;
+        }
+
+        .day h2 {
+            font-size: 1.2rem;
+        }
+        
+        .match {
+            padding: 10px;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚡ URA Battle T2 Final ⚡</h1>
+  <div class="sub-title">⚡ EBMS-09 To EBMS-15 ⚡</div>
+
+  <div class="schedule">
+    <div class="day">
+      <h2>Day 1 – 17 Sep 2025</h2>
+      <div class="match"><span class="time">2:30 PM</span> <span class="players">Ayush 2 vs Raj</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Shadow_King vs Venom</span></div>
+      <div class="match"><span class="time">6:00 PM</span> <span class="players">Indian Ladka vs Alpha_Akash</span></div>
+      <div class="match"><span class="time">8:00 PM</span> <span class="players">Harsh rai vs Mr.Legend</span></div>
+    </div>
+
+    <div class="day">
+      <h2>Day 2 – 18 Sep 2025</h2>
+      <div class="match"><span class="time">2:30 PM</span> <span class="players">Eren Yeager vs Thunder_Saurav</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Dark-Satya yt vs Mayank</span></div>
+      <div class="match"><span class="time">6:00 PM</span> <span class="players">Mr.Harry vs Radhi</span></div>
+      <div class="match"><span class="time">8:00 PM</span> <span class="players">Raj vs Alpha_Akash</span></div>
+    </div>
+
+    <div class="day">
+      <h2>Day 3 – 19 Sep 2025</h2>
+      <div class="match"><span class="time">2:30 PM</span> <span class="players">Ayush 2 vs Eren Yeager</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Venom vs Indian Ladka</span></div>
+      <div class="match"><span class="time">6:00 PM</span> <span class="players">Harsh rai vs Dark-Satya yt</span></div>
+      <div class="match"><span class="time">8:00 PM</span> <span class="players">Thunder_Saurav vs Mr.Harry</span></div>
+    </div>
+
+    <div class="day">
+      <h2>Day 4 – 20 Sep 2025</h2>
+      <div class="match"><span class="time">2:30 PM</span> <span class="players">Eren Yeager vs Radhi</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Raj vs Harsh rai</span></div>
+      <div class="match"><span class="time">6:00 PM</span> <span class="players">Alpha_Akash vs Thunder_Saurav</span></div>
+      <div class="match"><span class="time">8:00 PM</span> <span class="players">Venom vs Mr.Legend</span></div>
+    </div>
+
+    <div class="day">
+      <h2>Day 5 – 21 Sep 2025</h2>
+      <div class="match"><span class="time">2:30 PM</span> <span class="players">Ayush 2 vs Mayank</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Indian Ladka vs Dark-Satya yt</span></div>
+      <div class="match"><span class="time">6:00 PM</span> <span class="players">Mr.Harry vs Shadow_King</span></div>
+      <div class="match"><span class="time">8:00 PM</span> <span class="players">Radhi vs Mr.Legend</span></div>
+    </div>
+
+    <div class="day">
+      <h2>Day 6 – 22 Sep 2025</h2>
+      <div class="match"><span class="time">2:30 PM</span> <span class="players">Eren Yeager vs Alpha_Akash</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Raj vs Mayank</span></div>
+      <div class="match"><span class="time">6:00 PM</span> <span class="players">Venom vs Mr.Harry</span></div>
+      <div class="match"><span class="time">8:00 PM</span> <span class="players">Harsh rai vs Radhi</span></div>
+    </div>
+
+    <div class="day">
+      <h2>Day 7 – 23 Sep 2025</h2>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Ayush 2 vs Dark-Satya yt</span></div>
+      <div class="match"><span class="time">4:30 PM</span> <span class="players">Shadow_King vs Mr.Legend</span></div>
+      <div class="match"><span class="time">6:00 PM</span> <span class="players">Thunder_Saurav vs Shadow_King</span></div>
+      <div class="match"><span class="time">8:00 PM</span> <span class="players">Indian Ladka vs Mayank</span></div>
+    </div>
+    
+    <div class="day">
+      <h2>Semifinals – 25 Sep 2025 🔴</h2>
+      <div class="match semifinal-match">
+        <span class="time">4:30 PM</span> <span class="players">Eren Yeager vs Harsh rai</span>
+        <button class="inbox-button" id="inboxBtn1">Timing (4:30PM) </button>
+      </div>
+      <div class="match semifinal-match">
+        <span class="time">6:30 PM</span> <span class="players">Raj vs Venom</span>
+        <button class="inbox-button" id="inboxBtn2">Timing (6:00PM) </button>
+      </div>
+    </div>
+    
+    <div class="day">
+      <h2>Finals – 27 Sep 2025</h2>
+      <div class="match final-match"><span class="time">8:00 PM</span> <span class="players">Eren Yeager vs Venom</span></div>
+    </div>
+ <div class="day">
+      <h2>Winner 🏆</h2>
+      <div class="URA-T2 Final Winner"><span class="time"></span> <span class="players">🎉Eren Yeager🎉</span></div>
+    </div>
+
+  </div>
+
+  <div class="leaderboard-container">
+    <table class="leaderboard">
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Matches</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Points</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="qualified"><td>Eren Yeager</td><td>6</td><td>6</td><td>0</td><td>12</td><td class="status-qualified">🏆Winner🏆</td></tr>
+        <tr class="qualified"><td>Venom</td><td>6</td><td>4</td><td>2</td><td>8</td><td class="status-qualified">QUALIFIED</td></tr>
+        <tr class="qualified"><td>Raj</td><td>5</td><td>4</td><td>1</td><td>8</td><td class="status-qualified">QUALIFIED</td></tr>
+        <tr class="qualified"><td>Harsh rai</td><td>5</td><td>3</td><td>2</td><td>6</td><td class="status-qualified">QUALIFIED</td></tr>
+        <tr><td>Mr.Harry</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Dark-Satya yt</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Ayush 2</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Shadow_King</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Indian Ladka</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Mr.Legend</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
+        <tr><td>Alpha_Akash</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
+        <tr><td>Thunder_Saurav</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
+        <tr><td>Radhi</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
+        <tr><td>Mayank</td><td>4</td><td>0</td><td>4</td><td>0</td><td>Eliminated</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+       ⚔ Powered by URA Networks Team ⚔ • URA-Battle Tournament 
+  </footer>
+    
