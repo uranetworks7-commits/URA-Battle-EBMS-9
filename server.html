@@ -34,6 +34,18 @@
       color: #fff;
     }
 
+    /* === NEW WRAPPER FOR DESKTOP STYLING (Smaller Max-Width) === */
+    .content-wrapper {
+        z-index: 2;
+        width: 100%;
+        max-width: 600px; /* Reduced from 800px */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px; /* Reduced padding */
+        box-sizing: border-box;
+    }
+
     canvas {
       position: absolute;
       top: 0;
@@ -46,80 +58,82 @@
     }
 
     .header-container {
-      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 20px; /* Reduced margin */
+      width: 100%;
     }
 
     .congratulations {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 2rem;
+      font-size: 1.4rem; /* Reduced from 2rem */
       margin-bottom: 5px;
       color: var(--gold-primary);
-      text-shadow: 0 0 20px var(--gold-primary), 0 0 50px rgba(255, 215, 0, 0.9);
-      letter-spacing: 4px;
+      text-shadow: 0 0 15px var(--gold-primary), 0 0 30px rgba(255, 215, 0, 0.9);
+      letter-spacing: 3px; /* Reduced spacing */
     }
 
     h1 {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 5rem;
+      font-size: 3.5rem; /* Reduced from 5rem */
       margin: 0;
-      padding: 25px 50px;
+      padding: 18px 30px; /* Reduced padding */
       color: var(--gold-primary);
-      text-shadow: 0 0 30px var(--gold-primary), 0 0 60px var(--gold-secondary);
+      text-shadow: 0 0 20px var(--gold-primary), 0 0 40px var(--gold-secondary);
       background: rgba(255, 215, 0, 0.1);
-      backdrop-filter: blur(15px);
-      border-radius: 35px;
-      border: 4px solid rgba(255, 215, 0, 0.8);
+      backdrop-filter: blur(10px); /* Reduced blur */
+      border-radius: 25px; /* Reduced border radius */
+      border: 3px solid rgba(255, 215, 0, 0.8); /* Reduced border thickness */
       animation: pulse 2s infinite alternate;
-      letter-spacing: 4px;
-      box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+      letter-spacing: 3px; /* Reduced spacing */
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      max-width: 95%;
+      box-sizing: border-box;
     }
 
     @keyframes pulse {
-      from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3); }
-      to { box-shadow: 0 0 45px rgba(255, 215, 0, 1), 0 0 90px rgba(255, 215, 0, 0.5); }
+      from { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.3); }
+      to { box-shadow: 0 0 35px rgba(255, 215, 0, 1), 0 0 70px rgba(255, 215, 0, 0.5); }
     }
 
     .winner-list {
       display: grid;
-      gap: 30px;
-      margin-top: 45px;
+      gap: 20px; /* Reduced gap */
+      margin-top: 30px; /* Reduced margin */
       z-index: 2;
-      width: 90%;
-      max-width: 550px;
+      width: 100%;
+      max-width: 450px; /* Reduced max-width for the list */
     }
 
     .winner-box {
-      padding: 22px;
-      font-size: 2.2rem;
+      padding: 15px; /* Reduced padding */
+      font-size: 1.6rem; /* Reduced from 2.2rem */
       font-weight: 700;
       color: #fff;
       text-align: center;
       background: linear-gradient(145deg, rgba(0, 0, 0, 0.5) 0%, rgba(10, 10, 30, 0.5) 100%);
       border: 1px solid rgba(255, 215, 0, 0.5);
-      border-radius: 20px;
-      backdrop-filter: blur(25px);
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.3);
+      border-radius: 15px; /* Reduced border radius */
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7), inset 0 0 6px rgba(255, 255, 255, 0.3);
       transition: all 0.3s ease;
       animation: pop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.27) forwards;
       opacity: 0;
     }
 
     .winner-box:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 12px 35px rgba(255, 215, 0, 0.9), inset 0 0 8px rgba(255, 255, 255, 0.4);
+      transform: translateY(-5px) scale(1.02); /* Reduced hover effect */
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.9), inset 0 0 6px rgba(255, 255, 255, 0.4);
     }
 
     .winner-box:nth-child(1) {
       background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-secondary) 100%);
       color: #FFFFFF;
-      text-shadow: 0 0 15px #000, 0 0 25px var(--gold-primary);
-      font-size: 2.8rem;
-      border-width: 5px;
+      text-shadow: 0 0 10px #000, 0 0 15px var(--gold-primary);
+      font-size: 2.0rem; /* Reduced from 2.8rem */
+      border-width: 4px; /* Reduced border thickness */
       border-color: #FFFFFF;
     }
     .winner-box:nth-child(2) { animation-delay: 0.2s; }
@@ -127,8 +141,8 @@
     .winner-box:nth-child(4) { animation-delay: 0.6s; }
 
     .medal {
-      font-size: 1.3em;
-      margin-right: 18px;
+      font-size: 1.2em; /* Slightly reduced */
+      margin-right: 10px; /* Reduced margin */
     }
 
     @keyframes pop {
@@ -139,31 +153,31 @@
     /* BUTTONS CONTAINER */
     .button-container {
         display: flex;
-        gap: 20px;
-        margin-top: 40px;
+        gap: 15px; /* Reduced gap */
+        margin-top: 30px; /* Reduced margin */
         z-index: 3;
     }
 
     /* CELEBRATE BUTTON STYLE */
     .action-button {
-      padding: 15px 35px;
-      font-size: 1.5rem;
+      padding: 10px 25px; /* Reduced padding */
+      font-size: 1.1rem; /* Reduced from 1.5rem */
       font-weight: 700;
       font-family: 'Cinzel Decorative', serif;
       color: #fff;
       background: linear-gradient(45deg, var(--gold-primary), var(--gold-secondary));
       border: none;
-      border-radius: 10px;
+      border-radius: 8px; /* Reduced border radius */
       cursor: pointer;
-      box-shadow: 0 0 15px var(--gold-primary), 0 0 30px var(--gold-secondary);
+      box-shadow: 0 0 10px var(--gold-primary), 0 0 20px var(--gold-secondary);
       transition: transform 0.2s, box-shadow 0.2s;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1px; /* Reduced spacing */
     }
 
     .action-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px var(--gold-primary), 0 0 50px var(--gold-secondary);
+      transform: scale(1.04); /* Adjusted hover effect */
+      box-shadow: 0 0 20px var(--gold-primary), 0 0 40px var(--gold-secondary);
     }
 
     .action-button:active {
@@ -174,32 +188,11 @@
     #previous-matches-button {
         background: linear-gradient(45deg, var(--dark-blue), var(--light-blue));
         border: 2px solid var(--gold-primary);
-        box-shadow: 0 0 15px var(--light-blue), 0 0 30px rgba(0, 120, 255, 0.5);
+        box-shadow: 0 0 10px var(--light-blue), 0 0 20px rgba(0, 120, 255, 0.5);
     }
 
     #previous-matches-button:hover {
-        box-shadow: 0 0 25px var(--light-blue), 0 0 50px rgba(0, 120, 255, 0.8);
-    }
-
-
-    /* Media Queries for Responsiveness */
-    @media (max-width: 768px) {
-      .congratulations { font-size: 1.6rem; letter-spacing: 3px; }
-      h1 { font-size: 3.5rem; padding: 20px 35px; letter-spacing: 3px; }
-      .winner-list { max-width: 95%; }
-      .winner-box { font-size: 1.8rem; padding: 18px; }
-      .winner-box:nth-child(1) { font-size: 2.2rem; }
-      .action-button { font-size: 1.2rem; padding: 12px 30px; }
-      .medal { margin-right: 12px; }
-      .button-container { flex-direction: column; gap: 15px; }
-    }
-
-    @media (max-width: 480px) {
-      .congratulations { font-size: 1.2rem; letter-spacing: 2px; }
-      h1 { font-size: 2.5rem; padding: 15px 25px; letter-spacing: 2px; }
-      .winner-box { font-size: 1.4rem; padding: 15px; }
-      .winner-box:nth-child(1) { font-size: 1.8rem; }
-      .action-button { font-size: 1rem; padding: 10px 20px; }
+        box-shadow: 0 0 15px var(--light-blue), 0 0 30px rgba(0, 120, 255, 0.8);
     }
   </style>
 </head>
@@ -208,23 +201,24 @@
 
   <audio id="explosion-sound" src="https://files.catbox.moe/s6dv92.mp3" preload="auto"></audio>
 
-  <div class="header-container">
-    <div class="congratulations">A GRAND VICTORY FOR THE AGES!</div>
-    <h1>✨ URA Battle T2 CHAMPIONS ✨</h1>
-  </div>
+  <div class="content-wrapper">
+    <div class="header-container">
+      <div class="congratulations">A GRAND VICTORY FOR THE AGES!</div>
+      <h1>✨ URA Battle T2 CHAMPIONS ✨</h1>
+    </div>
 
-  <div class="winner-list">
-    <div class="winner-box"><span class="medal">👑</span> 1. Eren Yeager</div>
-    <div class="winner-box"><span class="medal">🥈</span> 2. Venom</div>
-    <div class="winner-box"><span class="medal">🥉</span> 3. Raj</div>
-    <div class="winner-box"><span class="medal">🏅</span> 4. Harsh Rai</div>
-  </div>
+    <div class="winner-list">
+      <div class="winner-box"><span class="medal">👑</span> 1. Eren Yeager</div>
+      <div class="winner-box"><span class="medal">🥈</span> 2. Venom</div>
+      <div class="winner-box"><span class="medal">🥉</span> 3. Raj</div>
+      <div class="winner-box"><span class="medal">🏅</span> 4. Harsh Rai</div>
+    </div>
 
-  <div class="button-container" id="button-container">
-    <button id="celebrate-button" class="action-button">Click to Celebrate!</button>
-    <button id="previous-matches-button" class="action-button">View Previous Matches</button>
+    <div class="button-container" id="button-container">
+      <button id="celebrate-button" class="action-button">Click to Celebrate!</button>
+      <button id="previous-matches-button" class="action-button">View Previous Matches</button>
+    </div>
   </div>
-
   <script>
     const canvas = document.getElementById("fireworks");
     const ctx = canvas.getContext("2d");
@@ -239,13 +233,12 @@
     let launchIntervalId = null;
     let animationFrameId = null;
 
-    // --- FIREWORK CONSTANTS (UPDATED FOR NEW TIER) ---
+    // --- FIREWORK CONSTANTS ---
     const TIER_5_SHOT = 5;
     const TIER_10_SHOT = 10;
     const TIER_15_SHOT = 15;
     const TIER_20_SHOT = 20;
     const TIER_30_SHOT = 30; 
-    const TIER_50_SHOT = 50; // New Tier 50 Shot
 
     // Plays and loops the background sound
     function startLoopingSound() {
@@ -268,14 +261,13 @@
         
         // Define particle properties based on type
         const props = {
+            // Updated properties for faster fade
             normal: { radius: 1, speed: 6, life: 50, decay: 0.90, gravity: 0.1, shadow: 5, flicker: 0 },
             bigRed: { radius: 2, speed: 8, life: 75, decay: 0.92, gravity: 0.15, shadow: 8, flicker: 0.1 },
             superHeavy: { radius: 2.5, speed: 9, life: 90, decay: 0.93, gravity: 0.18, shadow: 10, flicker: 0.2 },
             vipGreenGold: { radius: 3, speed: 10, life: 100, decay: 0.94, gravity: 0.2, shadow: 12, flicker: 0.3 },
             ultraVIP: { radius: 4, speed: 12, life: 125, decay: 0.95, gravity: 0.25, shadow: 20, flicker: 0.4 },
-            nuclear: { radius: 5, speed: 15, life: 150, decay: 0.96, gravity: 0.3, shadow: 30, flicker: 0.8 },
-            // NEW TIER
-            megaNuclear: { radius: 6, speed: 18, life: 200, decay: 0.97, gravity: 0.35, shadow: 50, flicker: 1.0 }
+            nuclear: { radius: 5, speed: 15, life: 150, decay: 0.96, gravity: 0.3, shadow: 30, flicker: 0.8 }
         };
         
         const p = props[type] || props.normal;
@@ -306,15 +298,14 @@
 
         let finalColor = this.originalColor;
         let opacity = 1;
-        
-        // Apply special effects for higher tiers
-        if (this.type === 'nuclear' || this.type === 'megaNuclear' || this.type === 'ultraVIP' || this.type === 'vipGreenGold') {
+
+        if (this.type === 'nuclear' || this.type === 'ultraVIP' || this.type === 'vipGreenGold') {
           const flicker = Math.random() * this.flickerIntensity;
           opacity = 1 - flicker;
           
-          if (this.type === 'nuclear' || this.type === 'megaNuclear') {
+          if (this.type === 'nuclear') {
               if (Math.random() < 0.5) finalColor = 'var(--nuclear-yellow)';
-              opacity *= (this.life / 200); // More dramatic fade for nuclear
+              opacity *= (this.life / 150); 
           }
         }
         
@@ -342,9 +333,7 @@
             superHeavy: { speed: 11, colors: ['#A020F0', '#FFFFFF', '#DDA0DD'], targetY: 0.25, tailLength: 30, headSize: 5, headShadow: 20 },
             vipGreenGold: { speed: 12, colors: ['#FFD700', '#00FF00', '#FFFFFF'], targetY: 0.2, tailLength: 35, headSize: 6, headShadow: 24 },
             ultraVIP: { speed: 13, colors: ['#FF2400', '#FF8C00', '#FFFF00', '#FFFFFF'], targetY: 0.1, tailLength: 40, headSize: 7, headShadow: 28 },
-            nuclear: { speed: 15, colors: ['#FFFF66', '#FFFFFF', '#FF8C00'], targetY: 0.05, tailLength: 50, headSize: 8, headShadow: 40 },
-            // NEW TIER
-            megaNuclear: { speed: 18, colors: ['#FFFFFF', '#FFFF66', '#FF0000', '#FF4500'], targetY: 0.02, tailLength: 60, headSize: 10, headShadow: 60 }
+            nuclear: { speed: 15, colors: ['#FFFF66', '#FFFFFF', '#FF8C00'], targetY: 0.05, tailLength: 50, headSize: 8, headShadow: 40 }
         };
 
         const c = config[shotType] || config.normal;
@@ -362,7 +351,7 @@
 
       update() {
         this.y -= this.speed;
-        if (Math.random() < 0.8 || this.shotType === 'nuclear' || this.shotType === 'megaNuclear') { 
+        if (Math.random() < 0.8 || this.shotType === 'nuclear') { 
              this.history.push({ x: this.x, y: this.y });
         }
         if (this.history.length > this.tailLength) {
@@ -372,11 +361,9 @@
         if (this.y < this.targetY) {
           this.explode();
           this.exploded = true;
-          if (this.shotType !== 'megaNuclear') {
+          if (this.shotType === 'normal' || this.shotType === 'bigRed' || this.shotType === 'superHeavy' || this.shotType === 'vipGreenGold' || this.shotType === 'ultraVIP') {
              shotCounter++;
-             if(shotCounter > TIER_50_SHOT) { shotCounter = 1; } // Restart counter after the biggest shot
-          } else {
-             shotCounter = 0; // Reset after megaNuclear
+             if(shotCounter > TIER_30_SHOT) { shotCounter = 1; } 
           }
         }
       }
@@ -404,7 +391,7 @@
 
       explode() {
         const particleCount = {
-            normal: 150, bigRed: 250, superHeavy: 350, vipGreenGold: 450, ultraVIP: 600, nuclear: 1000, megaNuclear: 1500
+            normal: 150, bigRed: 250, superHeavy: 350, vipGreenGold: 450, ultraVIP: 600, nuclear: 1000
         };
         const count = particleCount[this.shotType] || 150;
         createExplosion(this.x, this.y, this.colorSet, count, this.shotType);
@@ -425,7 +412,6 @@
 
         rockets.push(new Rocket(Math.random() * canvas.width));
 
-        // Launch frequency reduced from max 500-1000ms to max 1000-1500ms
         launchIntervalId = setInterval(() => {
             let nextShotType = 'normal';
             let centerShot = false;
@@ -445,20 +431,20 @@
             } else if (shotCounter === TIER_30_SHOT) { 
                 nextShotType = 'nuclear';
                 centerShot = true;
-            } else if (shotCounter === TIER_50_SHOT) { 
-                nextShotType = 'megaNuclear'; // NEW SHOT
-                centerShot = true;
             }
 
             const launchX = centerShot ? canvas.width / 2 : Math.random() * canvas.width;
             rockets.push(new Rocket(launchX, nextShotType));
 
-            if (nextShotType !== 'megaNuclear') {
-                 shotCounter++;
+            if (nextShotType !== 'normal') {
+                if (nextShotType === 'nuclear') {
+                    shotCounter = 0; 
+                }
             } else {
-                 shotCounter = 0; // Reset counter after the megaNuclear shot
+                 shotCounter++;
             }
-        }, Math.random() * 500 + 1000); // UPDATED: Min 1000ms, Max 1500ms
+
+        }, Math.random() * 500 + 500);
     }
 
     function animate() {
