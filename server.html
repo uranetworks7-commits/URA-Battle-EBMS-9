@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>🏆 URA Battle T2 GRAND CHAMPIONS 🏆</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -11,39 +14,40 @@
       --dark-blue: #000F29;
       --light-blue: #0078FF;
       --red-explosion: #FF4500;
-      /* New Colors for Tiered Shots */
       --purple-heavy: #A020F0;
       --green-vip: #00FF00;
-      --nuclear-yellow: #FFFF66; /* New Nuclear Color */
+      --nuclear-yellow: #FFFF66;
       --nuclear-white: #FFFFFF;
     }
 
     body {
       margin: 0;
-      height: 100vh;
-      /* Base background is Black */
+      min-height: 100vh;
+      overflow-y: auto;
+
       background: radial-gradient(circle at 50% 120%, var(--dark-blue) 0%, #000 100%);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='none'/%3E%3Cpath d='M25 50L50 25L75 50L50 75Z' fill='rgba(255, 215, 0, 0.03)'/%3E%3C/svg%3E");
       background-repeat: repeat;
-      overflow: hidden;
+
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       font-family: 'Poppins', sans-serif;
       color: #fff;
+
+      border: 5px solid var(--light-blue);
+      box-shadow: 0 0 20px var(--light-blue) inset, 0 0 20px var(--light-blue);
     }
 
-    /* === NEW WRAPPER FOR DESKTOP STYLING (Smaller Max-Width) === */
     .content-wrapper {
         z-index: 2;
-        width: 100%;
-        max-width: 600px; /* Reduced from 800px */
+        width: 250px;
+        max-width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 15px; /* Reduced padding */
-        box-sizing: border-box;
+        padding: 15px;
     }
 
     canvas {
@@ -62,36 +66,38 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 20px; /* Reduced margin */
-      width: 100%;
+      margin-bottom: 12px;
     }
 
+    /* 🏆 .congratulations Text Size (Kept 0.7rem) 🏆 */
     .congratulations {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1.4rem; /* Reduced from 2rem */
-      margin-bottom: 5px;
+      font-size: 0.7rem; 
+      margin-bottom: 4px;
       color: var(--gold-primary);
-      text-shadow: 0 0 15px var(--gold-primary), 0 0 30px rgba(255, 215, 0, 0.9);
-      letter-spacing: 3px; /* Reduced spacing */
+      text-shadow: 0 0 10px var(--gold-primary), 0 0 20px rgba(255, 215, 0, 0.9);
+      letter-spacing: 1px;
     }
 
+    /* 🏆 H1 (Title) Text Size (Kept 0.9rem) 🏆 */
     h1 {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 3.5rem; /* Reduced from 5rem */
+      font-size: 0.9rem; 
       margin: 0;
-      padding: 18px 30px; /* Reduced padding */
+      padding: 10px 20px;
       color: var(--gold-primary);
-      text-shadow: 0 0 20px var(--gold-primary), 0 0 40px var(--gold-secondary);
+      text-shadow: 0 0 15px var(--gold-primary), 0 0 30px var(--gold-secondary);
       background: rgba(255, 215, 0, 0.1);
-      backdrop-filter: blur(10px); /* Reduced blur */
-      border-radius: 25px; /* Reduced border radius */
-      border: 3px solid rgba(255, 215, 0, 0.8); /* Reduced border thickness */
+      backdrop-filter: blur(8px);
+      border-radius: 15px;
+      border: 2px solid rgba(255, 215, 0, 0.8);
       animation: pulse 2s infinite alternate;
-      letter-spacing: 3px; /* Reduced spacing */
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-      max-width: 95%;
-      box-sizing: border-box;
+      letter-spacing: 1px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      white-space: nowrap; 
+      max-width: fit-content;
     }
+    /* -------------------------------------------------- */
 
     @keyframes pulse {
       from { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.3); }
@@ -100,40 +106,34 @@
 
     .winner-list {
       display: grid;
-      gap: 20px; /* Reduced gap */
-      margin-top: 30px; /* Reduced margin */
-      z-index: 2;
+      gap: 10px;
+      margin-top: 20px;
       width: 100%;
-      max-width: 450px; /* Reduced max-width for the list */
+      max-width: 550px;
     }
 
     .winner-box {
-      padding: 15px; /* Reduced padding */
-      font-size: 1.6rem; /* Reduced from 2.2rem */
+      padding: 12px;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #fff;
       text-align: center;
       background: linear-gradient(145deg, rgba(0, 0, 0, 0.5) 0%, rgba(10, 10, 30, 0.5) 100%);
       border: 1px solid rgba(255, 215, 0, 0.5);
-      border-radius: 15px; /* Reduced border radius */
-      backdrop-filter: blur(20px);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7), inset 0 0 6px rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.7), inset 0 0 5px rgba(255, 255, 255, 0.3);
       transition: all 0.3s ease;
       animation: pop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.27) forwards;
       opacity: 0;
     }
 
-    .winner-box:hover {
-      transform: translateY(-5px) scale(1.02); /* Reduced hover effect */
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.9), inset 0 0 6px rgba(255, 255, 255, 0.4);
-    }
-
     .winner-box:nth-child(1) {
       background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-secondary) 100%);
       color: #FFFFFF;
-      text-shadow: 0 0 10px #000, 0 0 15px var(--gold-primary);
-      font-size: 2.0rem; /* Reduced from 2.8rem */
-      border-width: 4px; /* Reduced border thickness */
+      text-shadow: 0 0 8px #000, 0 0 15px var(--gold-primary);
+      font-size: 1.3rem;
+      border-width: 2px;
       border-color: #FFFFFF;
     }
     .winner-box:nth-child(2) { animation-delay: 0.2s; }
@@ -141,8 +141,8 @@
     .winner-box:nth-child(4) { animation-delay: 0.6s; }
 
     .medal {
-      font-size: 1.2em; /* Slightly reduced */
-      margin-right: 10px; /* Reduced margin */
+      font-size: 1em;
+      margin-right: 8px;
     }
 
     @keyframes pop {
@@ -153,46 +153,52 @@
     /* BUTTONS CONTAINER */
     .button-container {
         display: flex;
-        gap: 15px; /* Reduced gap */
-        margin-top: 30px; /* Reduced margin */
+        gap: 10px;
+        margin-top: 20px;
         z-index: 3;
+        flex-direction: row;
     }
 
-    /* CELEBRATE BUTTON STYLE */
+    /* 🏆 Reduced Button Text Size (Kept 0.7rem) 🏆 */
     .action-button {
-      padding: 10px 25px; /* Reduced padding */
-      font-size: 1.1rem; /* Reduced from 1.5rem */
+      padding: 10px 20px;
+      font-size: 0.7rem; 
       font-weight: 700;
       font-family: 'Cinzel Decorative', serif;
       color: #fff;
       background: linear-gradient(45deg, var(--gold-primary), var(--gold-secondary));
       border: none;
-      border-radius: 8px; /* Reduced border radius */
+      border-radius: 4px;
       cursor: pointer;
-      box-shadow: 0 0 10px var(--gold-primary), 0 0 20px var(--gold-secondary);
+      box-shadow: 0 0 8px var(--gold-primary), 0 0 15px var(--gold-secondary);
       transition: transform 0.2s, box-shadow 0.2s;
       text-transform: uppercase;
-      letter-spacing: 1px; /* Reduced spacing */
+      letter-spacing: 0.5px;
+      width: auto;
     }
+    /* -------------------------------------------------- */
 
     .action-button:hover {
-      transform: scale(1.04); /* Adjusted hover effect */
-      box-shadow: 0 0 20px var(--gold-primary), 0 0 40px var(--gold-secondary);
+      transform: scale(1.03);
+      box-shadow: 0 0 10px var(--gold-primary), 0 0 20px var(--gold-secondary);
     }
 
     .action-button:active {
       transform: scale(0.98);
     }
-    
+
     /* Secondary Button Style */
     #previous-matches-button {
         background: linear-gradient(45deg, var(--dark-blue), var(--light-blue));
-        border: 2px solid var(--gold-primary);
-        box-shadow: 0 0 10px var(--light-blue), 0 0 20px rgba(0, 120, 255, 0.5);
+        border: 1px solid var(--gold-primary);
+        box-shadow: 0 0 8px var(--light-blue), 0 0 15px rgba(0, 120, 255, 0.5);
     }
 
     #previous-matches-button:hover {
-        box-shadow: 0 0 15px var(--light-blue), 0 0 30px rgba(0, 120, 255, 0.8);
+        box-shadow: 0 0 10px var(--light-blue), 0 0 20px rgba(0, 120, 255, 0.8);
+    }
+
+    @media (max-width: 480px) {
     }
   </style>
 </head>
@@ -225,11 +231,11 @@
     const explosionSound = document.getElementById("explosion-sound");
     const celebrateButton = document.getElementById("celebrate-button");
     const previousMatchesButton = document.getElementById("previous-matches-button");
-    const buttonContainer = document.getElementById("button-container"); 
+    const buttonContainer = document.getElementById("button-container");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    let shotCounter = 0; 
+    let shotCounter = 0;
     let launchIntervalId = null;
     let animationFrameId = null;
 
@@ -238,7 +244,7 @@
     const TIER_10_SHOT = 10;
     const TIER_15_SHOT = 15;
     const TIER_20_SHOT = 20;
-    const TIER_30_SHOT = 30; 
+    const TIER_30_SHOT = 30;
 
     // Plays and loops the background sound
     function startLoopingSound() {
@@ -257,32 +263,34 @@
         this.x = x;
         this.y = y;
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.type = type; 
-        
+        this.type = type;
+
         // Define particle properties based on type
         const props = {
-            // Updated properties for faster fade
-            normal: { radius: 1, speed: 6, life: 50, decay: 0.90, gravity: 0.1, shadow: 5, flicker: 0 },
-            bigRed: { radius: 2, speed: 8, life: 75, decay: 0.92, gravity: 0.15, shadow: 8, flicker: 0.1 },
-            superHeavy: { radius: 2.5, speed: 9, life: 90, decay: 0.93, gravity: 0.18, shadow: 10, flicker: 0.2 },
-            vipGreenGold: { radius: 3, speed: 10, life: 100, decay: 0.94, gravity: 0.2, shadow: 12, flicker: 0.3 },
-            ultraVIP: { radius: 4, speed: 12, life: 125, decay: 0.95, gravity: 0.25, shadow: 20, flicker: 0.4 },
-            nuclear: { radius: 5, speed: 15, life: 150, decay: 0.96, gravity: 0.3, shadow: 30, flicker: 0.8 }
+            // 🏆 CRACKER SIZE (Particle) is SMALLER 🏆
+            normal: { radius: 0.7, speed: 6, life: 50, decay: 0.90, gravity: 0.1, shadow: 3, flicker: 0 },
+            bigRed: { radius: 1.4, speed: 8, life: 75, decay: 0.92, gravity: 0.15, shadow: 5.6, flicker: 0.1 },
+            superHeavy: { radius: 1.75, speed: 9, life: 90, decay: 0.93, gravity: 0.18, shadow: 7, flicker: 0.2 },
+            vipGreenGold: { radius: 2.1, speed: 10, life: 100, decay: 0.94, gravity: 0.2, shadow: 8.4, flicker: 0.3 },
+            ultraVIP: { radius: 2.8, speed: 12, life: 125, decay: 0.95, gravity: 0.25, shadow: 14, flicker: 0.4 },
+            nuclear: { radius: 3.5, speed: 15, life: 150, decay: 0.96, gravity: 0.3, shadow: 21, flicker: 0.8 }
+            // ------------------------------------------------------------------------
         };
-        
+        /* NOTE: These values are the original 'small' settings before the 'ultra small' request */
+
         const p = props[type] || props.normal;
 
-        this.radius = Math.random() * p.radius + 1;
+        this.radius = Math.random() * p.radius + 0.7; 
         this.speed = Math.random() * p.speed + 2;
         this.life = p.life;
         this.decay = p.decay;
         this.gravity = p.gravity;
         this.shadow = p.shadow;
-        this.flickerIntensity = p.flicker; 
+        this.flickerIntensity = p.flicker;
 
         this.angle = Math.random() * Math.PI * 2;
         this.blinkPhase = Math.random() * Math.PI * 2;
-        this.originalColor = this.color; 
+        this.originalColor = this.color;
       }
 
       update() {
@@ -302,22 +310,22 @@
         if (this.type === 'nuclear' || this.type === 'ultraVIP' || this.type === 'vipGreenGold') {
           const flicker = Math.random() * this.flickerIntensity;
           opacity = 1 - flicker;
-          
+
           if (this.type === 'nuclear') {
               if (Math.random() < 0.5) finalColor = 'var(--nuclear-yellow)';
-              opacity *= (this.life / 150); 
+              opacity *= (this.life / 150);
           }
         }
-        
+
         ctx.fillStyle = finalColor;
         ctx.globalAlpha = opacity;
-        
+
         ctx.shadowBlur = this.shadow;
         ctx.shadowColor = this.originalColor;
-        
+
         ctx.fill();
         ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1; 
+        ctx.globalAlpha = 1;
       }
     }
 
@@ -326,18 +334,21 @@
         this.x = x;
         this.y = canvas.height;
         this.shotType = shotType;
-        
+
         const config = {
-            normal: { speed: 7, colors: ['#FFD700', '#FFA500', '#ADD8E6', '#FFFFFF'], targetY: 0.4, tailLength: 15, headSize: 3, headShadow: 12 },
-            bigRed: { speed: 10, colors: ['#FF0000', '#FF4500', '#FFFFFF'], targetY: 0.3, tailLength: 25, headSize: 4, headShadow: 16 },
-            superHeavy: { speed: 11, colors: ['#A020F0', '#FFFFFF', '#DDA0DD'], targetY: 0.25, tailLength: 30, headSize: 5, headShadow: 20 },
-            vipGreenGold: { speed: 12, colors: ['#FFD700', '#00FF00', '#FFFFFF'], targetY: 0.2, tailLength: 35, headSize: 6, headShadow: 24 },
-            ultraVIP: { speed: 13, colors: ['#FF2400', '#FF8C00', '#FFFF00', '#FFFFFF'], targetY: 0.1, tailLength: 40, headSize: 7, headShadow: 28 },
-            nuclear: { speed: 15, colors: ['#FFFF66', '#FFFFFF', '#FF8C00'], targetY: 0.05, tailLength: 50, headSize: 8, headShadow: 40 }
+            // 🏆 CRACKER SIZE (Rocket) is SMALLER 🏆
+            normal: { speed: 7, colors: ['#FFD700', '#FFA500', '#ADD8E6', '#FFFFFF'], targetY: 0.4, tailLength: 15, headSize: 2.1, headShadow: 8 },
+            bigRed: { speed: 10, colors: ['#FF0000', '#FF4500', '#FFFFFF'], targetY: 0.3, tailLength: 25, headSize: 2.8, headShadow: 11.2 },
+            superHeavy: { speed: 11, colors: ['#A020F0', '#FFFFFF', '#DDA0DD'], targetY: 0.25, tailLength: 30, headSize: 3.5, headShadow: 14 },
+            vipGreenGold: { speed: 12, colors: ['#FFD700', '#00FF00', '#FFFFFF'], targetY: 0.2, tailLength: 35, headSize: 4.2, headShadow: 16.8 },
+            ultraVIP: { speed: 13, colors: ['#FF2400', '#FF8C00', '#FFFF00', '#FFFFFF'], targetY: 0.1, tailLength: 40, headSize: 4.9, headShadow: 19.6 },
+            nuclear: { speed: 15, colors: ['#FFFF66', '#FFFFFF', '#FF8C00'], targetY: 0.05, tailLength: 50, headSize: 5.6, headShadow: 28 }
+            // ------------------------------------------------------------------------
         };
+        /* NOTE: These values are the original 'small' settings before the 'ultra small' request */
 
         const c = config[shotType] || config.normal;
-        
+
         this.speed = Math.random() * 4 + c.speed;
         this.colorSet = c.colors;
         this.targetY = Math.random() * (canvas.height * c.targetY) + 20;
@@ -351,7 +362,7 @@
 
       update() {
         this.y -= this.speed;
-        if (Math.random() < 0.8 || this.shotType === 'nuclear') { 
+        if (Math.random() < 0.8 || this.shotType === 'nuclear') {
              this.history.push({ x: this.x, y: this.y });
         }
         if (this.history.length > this.tailLength) {
@@ -363,7 +374,7 @@
           this.exploded = true;
           if (this.shotType === 'normal' || this.shotType === 'bigRed' || this.shotType === 'superHeavy' || this.shotType === 'vipGreenGold' || this.shotType === 'ultraVIP') {
              shotCounter++;
-             if(shotCounter > TIER_30_SHOT) { shotCounter = 1; } 
+             if(shotCounter > TIER_30_SHOT) { shotCounter = 1; }
           }
         }
       }
@@ -382,7 +393,7 @@
           const point = this.history[i];
           const opacity = (i / this.history.length) * 0.8;
           ctx.lineTo(point.x, point.y);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`; 
+          ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
           ctx.lineWidth = this.headSize / 2;
           ctx.stroke();
         }
@@ -390,10 +401,11 @@
       }
 
       explode() {
+        // 🏆 Fireworks particle count kept at a medium size (original small size) 🏆
         const particleCount = {
-            normal: 150, bigRed: 250, superHeavy: 350, vipGreenGold: 450, ultraVIP: 600, nuclear: 1000
+            normal: 100, bigRed: 150, superHeavy: 200, vipGreenGold: 250, ultraVIP: 350, nuclear: 600
         };
-        const count = particleCount[this.shotType] || 150;
+        const count = particleCount[this.shotType] || 100;
         createExplosion(this.x, this.y, this.colorSet, count, this.shotType);
       }
     }
@@ -416,19 +428,19 @@
             let nextShotType = 'normal';
             let centerShot = false;
 
-            if (shotCounter === TIER_5_SHOT) { 
+            if (shotCounter === TIER_5_SHOT) {
                 nextShotType = 'bigRed';
                 centerShot = true;
-            } else if (shotCounter === TIER_10_SHOT) { 
+            } else if (shotCounter === TIER_10_SHOT) {
                 nextShotType = 'superHeavy';
                 centerShot = true;
-            } else if (shotCounter === TIER_15_SHOT) { 
+            } else if (shotCounter === TIER_15_SHOT) {
                 nextShotType = 'vipGreenGold';
                 centerShot = true;
-            } else if (shotCounter === TIER_20_SHOT) { 
+            } else if (shotCounter === TIER_20_SHOT) {
                 nextShotType = 'ultraVIP';
                 centerShot = true;
-            } else if (shotCounter === TIER_30_SHOT) { 
+            } else if (shotCounter === TIER_30_SHOT) {
                 nextShotType = 'nuclear';
                 centerShot = true;
             }
@@ -438,7 +450,7 @@
 
             if (nextShotType !== 'normal') {
                 if (nextShotType === 'nuclear') {
-                    shotCounter = 0; 
+                    shotCounter = 0;
                 }
             } else {
                  shotCounter++;
@@ -449,7 +461,7 @@
 
     function animate() {
       // FAST INVISIBLE: High opacity clear to remove trails instantly
-      ctx.fillStyle = "rgba(0,0,0,0.3)"; 
+      ctx.fillStyle = "rgba(0,0,0,0.3)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       for (let i = rockets.length - 1; i >= 0; i--) {
@@ -475,12 +487,12 @@
 
     function startShow() {
         // Hide the entire button container on celebration click
-        buttonContainer.style.display = 'none'; 
+        buttonContainer.style.display = 'none';
         startLoopingSound();
         launchRockets();
         animate();
     }
-    
+
     function viewPreviousMatches() {
         window.location.href = 'vpn.html';
     }
