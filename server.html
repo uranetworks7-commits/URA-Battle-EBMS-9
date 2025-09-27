@@ -2,597 +2,511 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>URA Battle T2 Final</title>
+  <title>🏆 URA Battle T2 GRAND CHAMPIONS 🏆</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Russo+One&display=swap');
-
     :root {
-      /* New color palette based on user request */
-      --cyan-neon-blue: #00ffff;
-      --gold-yellow: #ffd700;
-      --white-silver: #fff;
-      --purple-pink-neon: #ff1493; /* Deep Pink */
-      --purple-glow: #8a2be2; /* BlueViolet for purple tone */
-      --cream-color: #fffdd0; /* Cream for player names */
-      --orange-color: #ffa500; /* New: Orange for player name gradient */
-      --silver: #c0c0c0;
-      --bronze: #cd7f32;
-      /* New colors for the requested theme */
-      --emerald-red: #cc0000;
-      --emerald-green-glow: #00ff00;
-      --golden-yellow: #ffd700;
-      --electric-blue: #00ffff;
-
-
-      /* Glassmorphism variables */
-      --glass-background-light: rgba(255, 255, 255, 0.15);
-      --glass-background-medium: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.3);
-      --glass-shadow: rgba(0, 0, 0, 0.2);
+      --gold-primary: #FFD700;
+      --gold-secondary: #DAA520;
+      --dark-blue: #000F29;
+      --light-blue: #0078FF;
+      --red-explosion: #FF4500;
+      /* New Colors for Tiered Shots */
+      --purple-heavy: #A020F0;
+      --green-vip: #00FF00;
+      --nuclear-yellow: #FFFF66; /* New Nuclear Color */
+      --nuclear-white: #FFFFFF;
     }
 
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      color: var(--white-silver);
-      overflow-x: hidden;
-      background: url('https://files.catbox.moe/6n16q4.jpg') no-repeat center center fixed;
-      background-size: cover;
+      height: 100vh;
+      /* Base background is Black */
+      background: radial-gradient(circle at 50% 120%, var(--dark-blue) 0%, #000 100%);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='none'/%3E%3Cpath d='M25 50L50 25L75 50L50 75Z' fill='rgba(255, 215, 0, 0.03)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+    }
+
+    .header-container {
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .congratulations {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2rem;
+      margin-bottom: 5px;
+      color: var(--gold-primary);
+      text-shadow: 0 0 20px var(--gold-primary), 0 0 50px rgba(255, 215, 0, 0.9);
+      letter-spacing: 4px;
     }
 
     h1 {
-      text-align: center;
-      font-size: 3.5rem;
-      margin: 20px 0;
-      color: var(--cyan-neon-blue);
-      text-shadow: 0 0 20px var(--purple-pink-neon), 0 0 40px var(--purple-glow);
-      animation: glow 3s infinite alternate;
-      letter-spacing: 2px;
-      position: relative;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 15px var(--purple-pink-neon), 0 0 30px var(--purple-glow); }
-      to { text-shadow: 0 0 30px var(--purple-glow), 0 0 60px var(--purple-pink-neon); }
-    }
-
-    .sub-title {
-      text-align: center;
-      font-family: 'Russo One', sans-serif;
-      font-size: 1.2rem;
-      color: var(--cyan-neon-blue);
-      text-shadow: 0 0 10px var(--cyan-neon-blue);
-      margin-bottom: 15px;
-    }
-
-    .schedule {
-      width: 90%;
-      max-width: 900px;
-      margin: 15px auto;
-      border-radius: 12px;
-      padding: 15px;
-      background: var(--glass-background-light);
-      border: 1px solid var(--purple-pink-neon);
-      box-shadow: 0 8px 32px 0 var(--glass-shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      animation: pulsate 2s infinite alternate;
-    }
-
-    .leaderboard-container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 15px auto;
-      padding: 0;
-      overflow-x: auto;
-      overflow-y: hidden;
-      background: transparent;
-      box-shadow: none;
-      border: none;
-      animation: none;
-    }
-    
-    @keyframes pulsate {
-      from { box-shadow: 0 0 15px var(--purple-pink-neon), inset 0 0 8px var(--purple-glow); }
-      to { box-shadow: 0 0 25px var(--purple-pink-neon), inset 0 0 12px var(--purple-glow); }
-    }
-
-    .day {
-      margin-bottom: 20px;
-    }
-
-    .day h2 {
-      font-size: 1.8rem;
-      color: var(--cyan-neon-blue);
-      margin-bottom: 15px;
-      text-shadow: 0 0 15px var(--cyan-neon-blue);
-      border-bottom: 2px solid var(--cyan-neon-blue);
-      padding-bottom: 5px;
-    }
-
-    .match {
-      background: var(--glass-background-medium);
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 4px 10px 0 var(--glass-shadow);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      border-radius: 10px;
-      padding: 20px;
-      margin: 10px 0;
-      font-size: 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-      position: relative;
-    }
-
-    .match:hover {
-      transform: scale(1.03);
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 0 20px var(--cyan-neon-blue), 0 8px 20px 0 var(--glass-shadow);
-    }
-
-    .time {
-      color: var(--gold-yellow);
-      font-weight: bold;
-      text-shadow: 0 0 5px var(--gold-yellow);
-    }
-
-    .players {
-      color: transparent;
-      background-image: linear-gradient(to right, var(--orange-color), var(--cream-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-family: 'Russo One', sans-serif;
-      position: relative;
-      transition: color 0.3s;
-      text-align: right;
-    }
-    
-    .players:hover {
-      color: var(--cyan-neon-blue);
-      text-shadow: 0 0 10px var(--cyan-neon-blue);
-      background-image: none;
-      -webkit-background-clip: unset;
-      -webkit-text-fill-color: unset;
-    }
-
-    /* Updated Semifinal Match Styling */
-    .semifinal-match {
-        background: rgba(204, 0, 0, 0.2); /* Emerald Red with transparency */
-        border: 1px solid var(--emerald-red);
-        box-shadow: 0 0 20px var(--emerald-green-glow); /* Green glow effect */
-        animation: pulsate-red-green 1.5s infinite alternate;
-        font-size: 1.3rem;
-        position: relative;
-        display: flex; /* Ensure inner elements are laid out properly */
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .semifinal-match .time, .semifinal-match .players {
-        color: var(--emerald-red);
-        text-shadow: 0 0 10px var(--emerald-green-glow);
-        background-image: linear-gradient(to right, var(--emerald-green-glow), var(--emerald-red));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    @keyframes pulsate-red-green {
-        from { box-shadow: 0 0 15px var(--emerald-red), inset 0 0 8px var(--emerald-green-glow); }
-        to { box-shadow: 0 0 35px var(--emerald-green-glow), inset 0 0 18px var(--emerald-red); }
-    }
-
-
-    /* Updated Final Match Styling */
-    .final-match {
-        background: rgba(255, 215, 0, 0.15); /* Golden Yellow with transparency */
-        border-color: var(--golden-yellow);
-        box-shadow: 0 0 25px var(--golden-yellow), inset 0 0 15px var(--golden-yellow);
-        animation: pulsate-golden 1.5s infinite alternate, electric-pulse 0.5s infinite;
-    }
-
-    .final-match .time, .final-match .players {
-        color: var(--golden-yellow);
-        text-shadow: 0 0 10px var(--electric-blue);
-        background-image: linear-gradient(to right, var(--golden-yellow), var(--electric-blue));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    @keyframes pulsate-golden {
-        from { box-shadow: 0 0 15px var(--golden-yellow), inset 0 0 8px var(--electric-blue); }
-        to { box-shadow: 0 0 40px var(--electric-blue), inset 0 0 20px var(--golden-yellow); }
-    }
-
-    @keyframes electric-pulse {
-        0%, 100% {
-            border-color: var(--golden-yellow);
-            transform: scale(1);
-        }
-        50% {
-            border-color: var(--electric-blue);
-            transform: scale(1.02);
-            box-shadow: 0 0 30px var(--electric-blue), inset 0 0 10px var(--golden-yellow);
-        }
-    }
-
-
-    .leaderboard {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.7rem; /* Significantly reduced font size */
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--glass-background-light);
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 8px 32px 0 var(--glass-shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      position: relative;
-      z-index: 1;
-      white-space: nowrap;
-    }
-
-    .leaderboard::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
-      background-size: 40px 40px;
-      animation: shimmering 10s linear infinite;
-      z-index: -1;
-      opacity: 0.1;
-    }
-
-    @keyframes shimmering {
-      from { background-position: 0 0; }
-      to { background-position: -400px 0; }
-    }
-
-    .leaderboard th, .leaderboard td {
-      padding: 2px; /* Very small padding */
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .leaderboard th {
-      background: rgba(138, 43, 226, 0.4);
-      color: var(--white-silver);
-      text-shadow: 0 0 10px #000;
-      font-size: 0.8rem; /* Reduced font size */
-      letter-spacing: 1px;
-    }
-
-    .leaderboard tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .leaderboard tr:hover {
-      background: rgba(255, 20, 147, 0.2);
-      transition: 0.3s;
-    }
-
-    .leaderboard tr.gold {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 5rem;
+      margin: 0;
+      padding: 25px 50px;
+      color: var(--gold-primary);
+      text-shadow: 0 0 30px var(--gold-primary), 0 0 60px var(--gold-secondary);
       background: rgba(255, 215, 0, 0.1);
-      box-shadow: inset 0 0 20px var(--gold-yellow);
-      transition: background 0.5s, box-shadow 0.5s;
+      backdrop-filter: blur(15px);
+      border-radius: 35px;
+      border: 4px solid rgba(255, 215, 0, 0.8);
+      animation: pulse 2s infinite alternate;
+      letter-spacing: 4px;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
     }
 
-    .leaderboard tr.silver {
-      background: rgba(192, 192, 192, 0.1);
-      box-shadow: inset 0 0 20px var(--silver);
-      transition: background 0.5s, box-shadow 0.5s;
+    @keyframes pulse {
+      from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3); }
+      to { box-shadow: 0 0 45px rgba(255, 215, 0, 1), 0 0 90px rgba(255, 215, 0, 0.5); }
     }
 
-    .leaderboard tr.bronze {
-      background: rgba(205, 127, 50, 0.1);
-      box-shadow: inset 0 0 20px var(--bronze);
-      transition: background 0.5s, box-shadow 0.5s;
-    }
-    
-    .leaderboard tr.qualified {
-      background: rgba(0, 255, 255, 0.1);
-      box-shadow: inset 0 0 15px var(--cyan-neon-blue);
+    .winner-list {
+      display: grid;
+      gap: 30px;
+      margin-top: 45px;
+      z-index: 2;
+      width: 90%;
+      max-width: 550px;
     }
 
-    .leaderboard td.status-qualified {
-      color: var(--cyan-neon-blue);
-      font-weight: bold;
-      text-shadow: 0 0 5px var(--cyan-neon-blue);
-    }
-
-    /* New styles for the Golden Inbox button */
-    .inbox-button {
-      padding: 8px 15px;
-      font-family: 'Russo One', sans-serif;
-      font-size: 0.8rem;
-      color: var(--white-silver);
-      background: linear-gradient(to right, var(--gold-yellow), var(--orange-color));
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-shadow: 0 0 5px #000;
-      box-shadow: 0 0 15px var(--gold-yellow);
+    .winner-box {
+      padding: 22px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(145deg, rgba(0, 0, 0, 0.5) 0%, rgba(10, 10, 30, 0.5) 100%);
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      border-radius: 20px;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.3);
       transition: all 0.3s ease;
-      animation: pulsate-golden 2s infinite alternate;
+      animation: pop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.27) forwards;
+      opacity: 0;
     }
 
-    .inbox-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px var(--gold-yellow);
+    .winner-box:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 35px rgba(255, 215, 0, 0.9), inset 0 0 8px rgba(255, 255, 255, 0.4);
     }
 
-    /* New styles for the pop-up modal */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed;
-      z-index: 100;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      padding-top: 50px;
+    .winner-box:nth-child(1) {
+      background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-secondary) 100%);
+      color: #FFFFFF;
+      text-shadow: 0 0 15px #000, 0 0 25px var(--gold-primary);
+      font-size: 2.8rem;
+      border-width: 5px;
+      border-color: #FFFFFF;
+    }
+    .winner-box:nth-child(2) { animation-delay: 0.2s; }
+    .winner-box:nth-child(3) { animation-delay: 0.4s; }
+    .winner-box:nth-child(4) { animation-delay: 0.6s; }
+
+    .medal {
+      font-size: 1.3em;
+      margin-right: 18px;
     }
 
-    .modal-content {
-      background: var(--glass-background-light);
-      border: 1px solid var(--purple-pink-neon);
-      box-shadow: 0 8px 32px 0 var(--glass-shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 12px;
-      width: 80%;
-      max-width: 400px;
-      position: relative;
-      text-align: center;
-      animation: modal-fadein 0.5s;
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    @keyframes modal-fadein {
-      from {opacity: 0; transform: translateY(-50px);}
-      to {opacity: 1; transform: translateY(0);}
+    /* BUTTONS CONTAINER */
+    .button-container {
+        display: flex;
+        gap: 20px;
+        margin-top: 40px;
+        z-index: 3;
     }
 
-    .modal-content p {
-      font-family: 'Russo One', sans-serif;
-      font-size: 1.2rem;
-      color: var(--cyan-neon-blue);
-      text-shadow: 0 0 10px var(--cyan-neon-blue);
-    }
-
-    .close-button {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      position: absolute;
-      top: 10px;
-      right: 15px;
+    /* CELEBRATE BUTTON STYLE */
+    .action-button {
+      padding: 15px 35px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'Cinzel Decorative', serif;
+      color: #fff;
+      background: linear-gradient(45deg, var(--gold-primary), var(--gold-secondary));
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: color 0.3s;
+      box-shadow: 0 0 15px var(--gold-primary), 0 0 30px var(--gold-secondary);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
-    .close-button:hover,
-    .close-button:focus {
-      color: var(--purple-pink-neon);
-      text-decoration: none;
+    .action-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px var(--gold-primary), 0 0 50px var(--gold-secondary);
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 15px;
-      font-size: 1rem;
-      color: var(--white-silver);
-      text-shadow: 0 0 5px #000;
+    .action-button:active {
+      transform: scale(0.98);
     }
     
-    /* --- MEDIA QUERIES FOR MOBILE OPTIMIZATION --- */
-    @media screen and (max-width: 768px) {
-      body {
-        font-size: 14px;
-      }
-
-      h1 {
-        font-size: 2rem;
-        margin: 15px 0;
-      }
-
-      .sub-title {
-        font-size: 1rem;
-      }
-
-      .day h2 {
-        font-size: 1.5rem;
-      }
-
-      .schedule, .leaderboard-container {
-        width: 95%;
-        margin: 10px auto;
-        padding: 10px;
-      }
-
-      .match {
-        padding: 15px;
-        font-size: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .time {
-        margin-bottom: 5px;
-      }
-      
-      .players {
-        text-align: left;
-      }
-
-      .leaderboard th, .leaderboard td {
-        padding: 2px; /* Minimal padding for mobile */
-        font-size: 0.6rem; /* Even smaller font size for mobile */
-      }
-      
-      .inbox-button {
-        position: static;
-        transform: none;
-        margin-top: 10px;
-        width: 100%;
-        text-align: center;
-      }
-      
-      footer {
-        font-size: 0.8rem;
-        padding: 15px;
-      }
+    /* Secondary Button Style */
+    #previous-matches-button {
+        background: linear-gradient(45deg, var(--dark-blue), var(--light-blue));
+        border: 2px solid var(--gold-primary);
+        box-shadow: 0 0 15px var(--light-blue), 0 0 30px rgba(0, 120, 255, 0.5);
     }
 
-    @media screen and (max-width: 480px) {
-        h1 {
-            font-size: 1.5rem;
-        }
+    #previous-matches-button:hover {
+        box-shadow: 0 0 25px var(--light-blue), 0 0 50px rgba(0, 120, 255, 0.8);
+    }
 
-        .sub-title {
-            font-size: 0.9rem;
-        }
 
-        .day h2 {
-            font-size: 1.2rem;
-        }
-        
-        .match {
-            padding: 10px;
-        }
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .congratulations { font-size: 1.6rem; letter-spacing: 3px; }
+      h1 { font-size: 3.5rem; padding: 20px 35px; letter-spacing: 3px; }
+      .winner-list { max-width: 95%; }
+      .winner-box { font-size: 1.8rem; padding: 18px; }
+      .winner-box:nth-child(1) { font-size: 2.2rem; }
+      .action-button { font-size: 1.2rem; padding: 12px 30px; }
+      .medal { margin-right: 12px; }
+      .button-container { flex-direction: column; gap: 15px; }
+    }
+
+    @media (max-width: 480px) {
+      .congratulations { font-size: 1.2rem; letter-spacing: 2px; }
+      h1 { font-size: 2.5rem; padding: 15px 25px; letter-spacing: 2px; }
+      .winner-box { font-size: 1.4rem; padding: 15px; }
+      .winner-box:nth-child(1) { font-size: 1.8rem; }
+      .action-button { font-size: 1rem; padding: 10px 20px; }
     }
   </style>
 </head>
 <body>
+  <canvas id="fireworks"></canvas>
 
-  <h1>⚡ URA Battle T2 Final ⚡</h1>
-  <div class="sub-title">⚡ EBMS-09 To EBMS-15 ⚡</div>
+  <audio id="explosion-sound" src="https://files.catbox.moe/s6dv92.mp3" preload="auto"></audio>
 
-  <div class="schedule">
-    <div class="day">
-      <h2>Day 1 – 17 Sep 2025</h2>
-      <div class="match"><span class="time">2:30 PM</span> <span class="players">Ayush 2 vs Raj</span></div>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Shadow_King vs Venom</span></div>
-      <div class="match"><span class="time">6:00 PM</span> <span class="players">Indian Ladka vs Alpha_Akash</span></div>
-      <div class="match"><span class="time">8:00 PM</span> <span class="players">Harsh rai vs Mr.Legend</span></div>
-    </div>
-
-    <div class="day">
-      <h2>Day 2 – 18 Sep 2025</h2>
-      <div class="match"><span class="time">2:30 PM</span> <span class="players">Eren Yeager vs Thunder_Saurav</span></div>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Dark-Satya yt vs Mayank</span></div>
-      <div class="match"><span class="time">6:00 PM</span> <span class="players">Mr.Harry vs Radhi</span></div>
-      <div class="match"><span class="time">8:00 PM</span> <span class="players">Raj vs Alpha_Akash</span></div>
-    </div>
-
-    <div class="day">
-      <h2>Day 3 – 19 Sep 2025</h2>
-      <div class="match"><span class="time">2:30 PM</span> <span class="players">Ayush 2 vs Eren Yeager</span></div>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Venom vs Indian Ladka</span></div>
-      <div class="match"><span class="time">6:00 PM</span> <span class="players">Harsh rai vs Dark-Satya yt</span></div>
-      <div class="match"><span class="time">8:00 PM</span> <span class="players">Thunder_Saurav vs Mr.Harry</span></div>
-    </div>
-
-    <div class="day">
-      <h2>Day 4 – 20 Sep 2025</h2>
-      <div class="match"><span class="time">2:30 PM</span> <span class="players">Eren Yeager vs Radhi</span></div>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Raj vs Harsh rai</span></div>
-      <div class="match"><span class="time">6:00 PM</span> <span class="players">Alpha_Akash vs Thunder_Saurav</span></div>
-      <div class="match"><span class="time">8:00 PM</span> <span class="players">Venom vs Mr.Legend</span></div>
-    </div>
-
-    <div class="day">
-      <h2>Day 5 – 21 Sep 2025</h2>
-      <div class="match"><span class="time">2:30 PM</span> <span class="players">Ayush 2 vs Mayank</span></div>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Indian Ladka vs Dark-Satya yt</span></div>
-      <div class="match"><span class="time">6:00 PM</span> <span class="players">Mr.Harry vs Shadow_King</span></div>
-      <div class="match"><span class="time">8:00 PM</span> <span class="players">Radhi vs Mr.Legend</span></div>
-    </div>
-
-    <div class="day">
-      <h2>Day 6 – 22 Sep 2025</h2>
-      <div class="match"><span class="time">2:30 PM</span> <span class="players">Eren Yeager vs Alpha_Akash</span></div>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Raj vs Mayank</span></div>
-      <div class="match"><span class="time">6:00 PM</span> <span class="players">Venom vs Mr.Harry</span></div>
-      <div class="match"><span class="time">8:00 PM</span> <span class="players">Harsh rai vs Radhi</span></div>
-    </div>
-
-    <div class="day">
-      <h2>Day 7 – 23 Sep 2025</h2>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Ayush 2 vs Dark-Satya yt</span></div>
-      <div class="match"><span class="time">4:30 PM</span> <span class="players">Shadow_King vs Mr.Legend</span></div>
-      <div class="match"><span class="time">6:00 PM</span> <span class="players">Thunder_Saurav vs Shadow_King</span></div>
-      <div class="match"><span class="time">8:00 PM</span> <span class="players">Indian Ladka vs Mayank</span></div>
-    </div>
-    
-    <div class="day">
-      <h2>Semifinals – 25 Sep 2025 🔴</h2>
-      <div class="match semifinal-match">
-        <span class="time">4:30 PM</span> <span class="players">Eren Yeager vs Harsh rai</span>
-        <button class="inbox-button" id="inboxBtn1">Timing (4:30PM) </button>
-      </div>
-      <div class="match semifinal-match">
-        <span class="time">6:30 PM</span> <span class="players">Raj vs Venom</span>
-        <button class="inbox-button" id="inboxBtn2">Timing (6:00PM) </button>
-      </div>
-    </div>
-    
-    <div class="day">
-      <h2>Finals – 27 Sep 2025</h2>
-      <div class="match final-match"><span class="time">8:00 PM</span> <span class="players">Eren Yeager vs Venom</span></div>
-    </div>
-
+  <div class="header-container">
+    <div class="congratulations">A GRAND VICTORY FOR THE AGES!</div>
+    <h1>✨ URA Battle T2 CHAMPIONS ✨</h1>
   </div>
 
-  <div class="leaderboard-container">
-    <table class="leaderboard">
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Matches</th>
-          <th>Wins</th>
-          <th>Losses</th>
-          <th>Points</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="qualified"><td>Eren Yeager</td><td>5</td><td>5</td><td>0</td><td>10</td><td class="status-qualified">QUALIFIED</td></tr>
-        <tr class="qualified"><td>Venom</td><td>5</td><td>4</td><td>1</td><td>8</td><td class="status-qualified">QUALIFIED</td></tr>
-        <tr class="qualified"><td>Raj</td><td>5</td><td>4</td><td>1</td><td>8</td><td class="status-qualified">QUALIFIED</td></tr>
-        <tr class="qualified"><td>Harsh rai</td><td>5</td><td>3</td><td>2</td><td>6</td><td class="status-qualified">QUALIFIED</td></tr>
-        <tr><td>Mr.Harry</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
-        <tr><td>Dark-Satya yt</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
-        <tr><td>Ayush 2</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
-        <tr><td>Shadow_King</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
-        <tr><td>Indian Ladka</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
-        <tr><td>Mr.Legend</td><td>4</td><td>2</td><td>2</td><td>4</td><td>Eliminated</td></tr>
-        <tr><td>Alpha_Akash</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
-        <tr><td>Thunder_Saurav</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
-        <tr><td>Radhi</td><td>4</td><td>1</td><td>3</td><td>2</td><td>Eliminated</td></tr>
-        <tr><td>Mayank</td><td>4</td><td>0</td><td>4</td><td>0</td><td>Eliminated</td></tr>
-      </tbody>
-    </table>
+  <div class="winner-list">
+    <div class="winner-box"><span class="medal">👑</span> 1. Eren Yeager</div>
+    <div class="winner-box"><span class="medal">🥈</span> 2. Venom</div>
+    <div class="winner-box"><span class="medal">🥉</span> 3. Raj</div>
+    <div class="winner-box"><span class="medal">🏅</span> 4. Harsh Rai</div>
   </div>
 
-  <footer>
-     ⚔    ⚔ Powered by URA Networks Team ⚔ • URA-Battle Tournament 
-  </footer>
+  <div class="button-container" id="button-container">
+    <button id="celebrate-button" class="action-button">Click to Celebrate!</button>
+    <button id="previous-matches-button" class="action-button">View Previous Matches</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+    const explosionSound = document.getElementById("explosion-sound");
+    const celebrateButton = document.getElementById("celebrate-button");
+    const previousMatchesButton = document.getElementById("previous-matches-button");
+    const buttonContainer = document.getElementById("button-container"); 
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let shotCounter = 0; 
+    let launchIntervalId = null;
+    let animationFrameId = null;
+
+    // --- FIREWORK CONSTANTS (UPDATED FOR NEW TIER) ---
+    const TIER_5_SHOT = 5;
+    const TIER_10_SHOT = 10;
+    const TIER_15_SHOT = 15;
+    const TIER_20_SHOT = 20;
+    const TIER_30_SHOT = 30; 
+    const TIER_50_SHOT = 50; // New Tier 50 Shot
+
+    // Plays and loops the background sound
+    function startLoopingSound() {
+      if (explosionSound && explosionSound.readyState >= 3) {
+        explosionSound.loop = true;
+        if (explosionSound.paused || explosionSound.ended) {
+          explosionSound.play().catch(e => {
+            console.error("Autoplay prevented:", e);
+          });
+        }
+      }
+    }
+
+    class Particle {
+      constructor(x, y, colors, type = 'normal') {
+        this.x = x;
+        this.y = y;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.type = type; 
+        
+        // Define particle properties based on type
+        const props = {
+            normal: { radius: 1, speed: 6, life: 50, decay: 0.90, gravity: 0.1, shadow: 5, flicker: 0 },
+            bigRed: { radius: 2, speed: 8, life: 75, decay: 0.92, gravity: 0.15, shadow: 8, flicker: 0.1 },
+            superHeavy: { radius: 2.5, speed: 9, life: 90, decay: 0.93, gravity: 0.18, shadow: 10, flicker: 0.2 },
+            vipGreenGold: { radius: 3, speed: 10, life: 100, decay: 0.94, gravity: 0.2, shadow: 12, flicker: 0.3 },
+            ultraVIP: { radius: 4, speed: 12, life: 125, decay: 0.95, gravity: 0.25, shadow: 20, flicker: 0.4 },
+            nuclear: { radius: 5, speed: 15, life: 150, decay: 0.96, gravity: 0.3, shadow: 30, flicker: 0.8 },
+            // NEW TIER
+            megaNuclear: { radius: 6, speed: 18, life: 200, decay: 0.97, gravity: 0.35, shadow: 50, flicker: 1.0 }
+        };
+        
+        const p = props[type] || props.normal;
+
+        this.radius = Math.random() * p.radius + 1;
+        this.speed = Math.random() * p.speed + 2;
+        this.life = p.life;
+        this.decay = p.decay;
+        this.gravity = p.gravity;
+        this.shadow = p.shadow;
+        this.flickerIntensity = p.flicker; 
+
+        this.angle = Math.random() * Math.PI * 2;
+        this.blinkPhase = Math.random() * Math.PI * 2;
+        this.originalColor = this.color; 
+      }
+
+      update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed + this.gravity;
+        this.speed *= this.decay;
+        this.life--;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+
+        let finalColor = this.originalColor;
+        let opacity = 1;
+        
+        // Apply special effects for higher tiers
+        if (this.type === 'nuclear' || this.type === 'megaNuclear' || this.type === 'ultraVIP' || this.type === 'vipGreenGold') {
+          const flicker = Math.random() * this.flickerIntensity;
+          opacity = 1 - flicker;
+          
+          if (this.type === 'nuclear' || this.type === 'megaNuclear') {
+              if (Math.random() < 0.5) finalColor = 'var(--nuclear-yellow)';
+              opacity *= (this.life / 200); // More dramatic fade for nuclear
+          }
+        }
+        
+        ctx.fillStyle = finalColor;
+        ctx.globalAlpha = opacity;
+        
+        ctx.shadowBlur = this.shadow;
+        ctx.shadowColor = this.originalColor;
+        
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1; 
+      }
+    }
+
+    class Rocket {
+      constructor(x, shotType = 'normal') {
+        this.x = x;
+        this.y = canvas.height;
+        this.shotType = shotType;
+        
+        const config = {
+            normal: { speed: 7, colors: ['#FFD700', '#FFA500', '#ADD8E6', '#FFFFFF'], targetY: 0.4, tailLength: 15, headSize: 3, headShadow: 12 },
+            bigRed: { speed: 10, colors: ['#FF0000', '#FF4500', '#FFFFFF'], targetY: 0.3, tailLength: 25, headSize: 4, headShadow: 16 },
+            superHeavy: { speed: 11, colors: ['#A020F0', '#FFFFFF', '#DDA0DD'], targetY: 0.25, tailLength: 30, headSize: 5, headShadow: 20 },
+            vipGreenGold: { speed: 12, colors: ['#FFD700', '#00FF00', '#FFFFFF'], targetY: 0.2, tailLength: 35, headSize: 6, headShadow: 24 },
+            ultraVIP: { speed: 13, colors: ['#FF2400', '#FF8C00', '#FFFF00', '#FFFFFF'], targetY: 0.1, tailLength: 40, headSize: 7, headShadow: 28 },
+            nuclear: { speed: 15, colors: ['#FFFF66', '#FFFFFF', '#FF8C00'], targetY: 0.05, tailLength: 50, headSize: 8, headShadow: 40 },
+            // NEW TIER
+            megaNuclear: { speed: 18, colors: ['#FFFFFF', '#FFFF66', '#FF0000', '#FF4500'], targetY: 0.02, tailLength: 60, headSize: 10, headShadow: 60 }
+        };
+
+        const c = config[shotType] || config.normal;
+        
+        this.speed = Math.random() * 4 + c.speed;
+        this.colorSet = c.colors;
+        this.targetY = Math.random() * (canvas.height * c.targetY) + 20;
+        this.tailLength = c.tailLength;
+        this.headSize = c.headSize;
+        this.headShadow = c.headShadow;
+        this.history = [];
+        this.exploded = false;
+        this.color = this.colorSet[Math.floor(Math.random() * this.colorSet.length)];
+      }
+
+      update() {
+        this.y -= this.speed;
+        if (Math.random() < 0.8 || this.shotType === 'nuclear' || this.shotType === 'megaNuclear') { 
+             this.history.push({ x: this.x, y: this.y });
+        }
+        if (this.history.length > this.tailLength) {
+          this.history.shift();
+        }
+
+        if (this.y < this.targetY) {
+          this.explode();
+          this.exploded = true;
+          if (this.shotType !== 'megaNuclear') {
+             shotCounter++;
+             if(shotCounter > TIER_50_SHOT) { shotCounter = 1; } // Restart counter after the biggest shot
+          } else {
+             shotCounter = 0; // Reset after megaNuclear
+          }
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.headSize, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = this.headShadow;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        for (let i = this.history.length - 1; i >= 0; i--) {
+          const point = this.history[i];
+          const opacity = (i / this.history.length) * 0.8;
+          ctx.lineTo(point.x, point.y);
+          ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`; 
+          ctx.lineWidth = this.headSize / 2;
+          ctx.stroke();
+        }
+        ctx.shadowBlur = 0;
+      }
+
+      explode() {
+        const particleCount = {
+            normal: 150, bigRed: 250, superHeavy: 350, vipGreenGold: 450, ultraVIP: 600, nuclear: 1000, megaNuclear: 1500
+        };
+        const count = particleCount[this.shotType] || 150;
+        createExplosion(this.x, this.y, this.colorSet, count, this.shotType);
+      }
+    }
+
+    let rockets = [];
+    let particles = [];
+
+    function createExplosion(x, y, colors, count, type) {
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle(x, y, colors, type));
+      }
+    }
+
+    function launchRockets() {
+        if (launchIntervalId) clearInterval(launchIntervalId);
+
+        rockets.push(new Rocket(Math.random() * canvas.width));
+
+        // Launch frequency reduced from max 500-1000ms to max 1000-1500ms
+        launchIntervalId = setInterval(() => {
+            let nextShotType = 'normal';
+            let centerShot = false;
+
+            if (shotCounter === TIER_5_SHOT) { 
+                nextShotType = 'bigRed';
+                centerShot = true;
+            } else if (shotCounter === TIER_10_SHOT) { 
+                nextShotType = 'superHeavy';
+                centerShot = true;
+            } else if (shotCounter === TIER_15_SHOT) { 
+                nextShotType = 'vipGreenGold';
+                centerShot = true;
+            } else if (shotCounter === TIER_20_SHOT) { 
+                nextShotType = 'ultraVIP';
+                centerShot = true;
+            } else if (shotCounter === TIER_30_SHOT) { 
+                nextShotType = 'nuclear';
+                centerShot = true;
+            } else if (shotCounter === TIER_50_SHOT) { 
+                nextShotType = 'megaNuclear'; // NEW SHOT
+                centerShot = true;
+            }
+
+            const launchX = centerShot ? canvas.width / 2 : Math.random() * canvas.width;
+            rockets.push(new Rocket(launchX, nextShotType));
+
+            if (nextShotType !== 'megaNuclear') {
+                 shotCounter++;
+            } else {
+                 shotCounter = 0; // Reset counter after the megaNuclear shot
+            }
+        }, Math.random() * 500 + 1000); // UPDATED: Min 1000ms, Max 1500ms
+    }
+
+    function animate() {
+      // FAST INVISIBLE: High opacity clear to remove trails instantly
+      ctx.fillStyle = "rgba(0,0,0,0.3)"; 
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = rockets.length - 1; i >= 0; i--) {
+        const r = rockets[i];
+        r.update();
+        r.draw();
+        if (r.exploded) {
+          rockets.splice(i, 1);
+        }
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    function startShow() {
+        // Hide the entire button container on celebration click
+        buttonContainer.style.display = 'none'; 
+        startLoopingSound();
+        launchRockets();
+        animate();
+    }
     
+    function viewPreviousMatches() {
+        window.location.href = 'vpn.html';
+    }
+
+    // Event Listeners for the Buttons
+    celebrateButton.addEventListener('click', startShow, { once: true });
+    previousMatchesButton.addEventListener('click', viewPreviousMatches);
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
