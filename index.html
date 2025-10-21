@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>URA Battle | EBMS-09 Server</title>
+  <title>URA | EBMS-09 Server</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0e1a;
       --bg-card: #121827;
-      --border-blue: #0077ff;
+      --border-blue: #00aaff; /* Brighter Blue */
       --text-light: #e0eafb;
       --text-blue: #39b5ff;
-      --glow-blue: rgba(0, 119, 255, 0.7);
+      --glow-blue: rgba(0, 170, 255, 0.9); /* Stronger Glow */
+      --glass-bg: rgba(255, 255, 255, 0.1); /* Lighter for glass effect */
+      --glass-border: rgba(255, 255, 255, 0.2);
     }
     
     @keyframes move-bg {
@@ -21,7 +23,7 @@
     }
     
     body {
-      background: #0a0e1a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230a0e1a"/><circle cx="50" cy="50" r="10" fill="%231a2a4b" opacity="0.5"/><circle cx="150" cy="150" r="10" fill="%231a2a4b" opacity="0.5"/><circle cx="100" cy="100" r="15" fill="%231a2a4b" opacity="0.5"/><path d="M0,0 L200,0 L200,200 L0,200 Z" fill="none" stroke="%231a2a4b" stroke-width="1"/></svg>');
+      background: var(--bg-dark) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230a0e1a"/><circle cx="50" cy="50" r="10" fill="%231a2a4b" opacity="0.5"/><circle cx="150" cy="150" r="10" fill="%231a2a4b" opacity="0.5"/><circle cx="100" cy="100" r="15" fill="%231a2a4b" opacity="0.5"/><path d="M0,0 L200,0 L200,200 L0,200 Z" fill="none" stroke="%231a2a4b" stroke-width="1"/></svg>');
       animation: move-bg 30s linear infinite;
       color: var(--text-light);
       font-family: 'Roboto', sans-serif;
@@ -31,6 +33,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
     
     .header {
@@ -54,7 +57,12 @@
       font-weight: 700;
       font-size: 2.5rem;
       color: var(--text-blue);
-      text-shadow: 0 0 15px var(--glow-blue);
+      text-shadow: 0 0 20px var(--glow-blue); /* Increased glow */
+      transition: color 0.3s ease;
+    }
+    
+    .header-left h1:hover {
+      color: #66ccff;
     }
     
     .header-left .subtitle {
@@ -65,38 +73,18 @@
       color: #92a1c0;
     }
     
-    .btn-top {
-      background: linear-gradient(90deg, #ffd700, #ffa500);
-      color: #1a1a1a;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-    }
-    
-    .btn-top:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
-    }
-    
+    /* Removed .btn-top styling as the button is removed in HTML */
+
     .container {
       width: 100%;
       max-width: 1200px;
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex; /* Changed to flex for simplicity as there's only one column now */
+      flex-direction: column;
       gap: 30px;
       margin: 0 auto;
     }
     
-    @media (min-width: 1024px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    .main-content, .sidebar {
+    .main-content {
       display: flex;
       flex-direction: column;
       gap: 30px;
@@ -104,151 +92,90 @@
     
     .panel {
       background: rgba(18, 24, 39, 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px); /* Subtle blur for panels */
+      border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly brighter border */
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow */
       padding: 25px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       position: relative;
     }
     
     .panel:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transform: translateY(-8px); /* Deeper lift */
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+      border-color: var(--border-blue); /* Border highlight on hover */
     }
     
     .panel-title {
       font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 1.5rem;
+      font-weight: 700; /* Bolder title */
+      font-size: 1.6rem;
       color: var(--text-blue);
-      border-bottom: 2px solid var(--border-blue);
+      border-bottom: 3px solid var(--border-blue); /* Thicker bottom border */
       padding-bottom: 10px;
       margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(57, 181, 255, 0.5); /* Title glow */
     }
     
-    .match-card {
-      background: linear-gradient(135deg, #0d121f, #18223d);
-      border: 1px solid var(--border-blue);
-      border-radius: 10px;
-      padding: 15px 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    .match-time {
-      font-size: 0.9rem;
-      color: #a8bddc;
-      margin-bottom: 10px;
-    }
-    
-    .match-time span {
-      color: var(--text-blue);
-      font-weight: bold;
-    }
-    
-    .players {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .player-name {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: 1px;
-    }
-    
-    .vs-text {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      color: #fff;
-      font-size: 1.2rem;
-      padding: 0 10px;
-    }
-    
-    .player-name.eren { color: #ff6347; }
-    .player-name.rocky { color: #4682b4; }
-    .player-name.ayush { color: #32cd32; }
-    .player-name.bhramhose { color: #ffa500; }
-    
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    
-    .leaderboard-table th, .leaderboard-table td {
-      padding: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .leaderboard-table th {
-      background-color: #0d121f;
-      color: var(--text-blue);
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    
-    .leaderboard-table tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-    
-    .gold-row { background-color: #ffd70030; font-weight: bold; color: #ffd700; }
-    .silver-row { background-color: #c0c0c030; font-weight: bold; color: #c0c0c0; }
-    .bronze-row { background-color: #cd7f3230; font-weight: bold; color: #cd7f32; }
+    /* Removed match-card, leaderboard-table styling as they were not in the provided HTML */
     
     .btc-panel .info-line {
-      font-size: 0.9rem;
-      margin-bottom: 8px;
+      font-size: 1.05rem; /* Slightly larger text */
+      margin-bottom: 12px;
+      color: #c0d3f0;
+      font-style: italic; /* Use italic for a stylish look */
     }
     
     .btc-panel .highlight {
       color: gold;
       font-weight: bold;
+      text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
     }
     
+    /* Custom styling for the BTC value line */
+    .btc-value {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: #ffcc00; /* Gold */
+        text-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
+        padding: 5px 0;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        margin-top: 5px;
+        margin-bottom: 20px !important;
+    }
+
     .action-buttons {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      margin-top: 20px;
+      margin-top: 25px;
     }
     
     .btn {
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
+      padding: 14px 25px; /* Bigger button */
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
       text-align: center;
       text-decoration: none;
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
-    }
-    
-    .btn-main {
-      background: linear-gradient(90deg, #39b5ff, #0077ff);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
-    }
-    
-    .btn-main:hover {
-      background: linear-gradient(90deg, #0077ff, #39b5ff);
-      transform: translateY(-2px);
+      letter-spacing: 0.5px;
     }
     
     .btn-gold {
-      background: linear-gradient(90deg, #ffd700, #ffa500);
+      background: linear-gradient(90deg, #ffdb58, #ffb600); /* Golden gradient */
       color: #1a1a1a;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+      box-shadow: 0 6px 20px rgba(255, 192, 0, 0.6); /* Stronger gold shadow */
     }
     
     .btn-gold:hover {
-      background: linear-gradient(90deg, #ffa500, #ffd700);
-      transform: translateY(-2px);
+      background: linear-gradient(90deg, #ffc800, #ffdb58);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 192, 0, 0.8);
     }
     
     .commands-list {
@@ -259,183 +186,132 @@
     
     .commands-list li {
       background-color: #0d121f;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border-left: 3px solid var(--border-blue);
+      padding: 15px; /* More padding */
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border-left: 4px solid var(--border-blue); /* Thicker border */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.2s ease;
+    }
+
+    .commands-list li:hover {
+      background-color: #1a2333;
     }
     
     .commands-list b {
       color: var(--text-blue);
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
     }
     
     .commands-list code {
       background-color: #05080f;
       color: #a8bddc;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 4px 8px; /* More padding */
+      border-radius: 6px;
       font-family: 'Courier New', monospace;
+      border: 1px solid rgba(57, 181, 255, 0.2);
     }
     
     .commands-notice {
-      font-size: 0.8rem;
-      color: #7d8ea6;
-      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #ff9999; /* Reddish warning color */
+      margin-top: 20px;
+      font-weight: 600;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-top: 10px;
     }
     
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    
-    .popup-content {
-      background: var(--bg-card);
-      border: 1px solid var(--border-blue);
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-      transform: scale(0.8);
-      opacity: 0;
-      animation: popup-in 0.3s forwards;
-      width: min(90%, 400px);
-    }
-    
-    .popup-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #ff4747;
-    }
-    
-    @keyframes popup-in {
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    footer {
-      margin-top: 40px;
-      color: #7d8ea6;
-      text-align: center;
-    }
-
-    /* System Notice Pop-up */
+    /* --- System Notice / Aero Glass Pop-up Styles --- */
     .system-notice-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75); /* Darker overlay */
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 2000;
+      backdrop-filter: blur(2px); /* Subtle background blur */
     }
 
     .system-notice-content {
-      background: #0d121f;
-      border: 2px solid #39b5ff;
+      background: var(--glass-bg); /* Use glass background variable */
+      border: 1px solid var(--glass-border); /* Subtle glass border */
       padding: 30px;
       border-radius: 15px;
       text-align: center;
       position: relative;
-      box-shadow: 0 0 20px rgba(57, 181, 255, 0.5);
-      width: min(90%, 400px);
+      box-shadow: 0 10px 40px rgba(57, 181, 255, 0.6), 0 0 15px var(--glass-border) inset; /* Stronger glow and inner shadow */
+      width: min(90%, 450px);
       transform: scale(0.8);
       opacity: 0;
-      animation: popup-in 0.3s forwards;
+      animation: popup-in 0.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy animation */
+      backdrop-filter: blur(15px); /* Strong glass blur on the content */
+      -webkit-backdrop-filter: blur(15px);
+    }
+    
+    .system-notice-content h3 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: #ffeb3b; /* Attention grabbing color */
+        text-shadow: 0 0 10px rgba(255, 235, 59, 0.8);
+        margin-bottom: 15px;
+    }
+
+    .system-notice-content p {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        line-height: 1.6;
     }
     
     .system-notice-close {
         position: absolute;
         top: 10px;
         right: 15px;
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* Larger cross button */
         cursor: pointer;
-        color: #fff;
-        opacity: 0.6;
-        transition: opacity 0.3s ease;
+        color: #ff4747; /* Red cross */
+        opacity: 0.8;
+        transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+        border-radius: 50%;
+        padding: 5px;
     }
 
     .system-notice-close:hover {
         opacity: 1;
+        color: #ff0000;
+        transform: rotate(90deg);
     }
 
-    /* URA-Battle T-2 Final Button Styles */
-    .ura-panel-button {
-      position: relative;
-      padding: 15px 40px;
-      font-size: 1.25em;
-      font-weight: 600;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-decoration: none;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      cursor: pointer;
-      background: linear-gradient(45deg, #4c2c77, #774c99);
-      border: none;
-      display: inline-block;
-      margin-top: 30px; /* Add some space below the panels */
+    @keyframes popup-in {
+      to { transform: scale(1); opacity: 1; }
     }
 
-    .ura-panel-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      background: linear-gradient(45deg, #5e3a8f, #8c63b2);
+    footer {
+      margin-top: 50px;
+      color: #7d8ea6;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      width: 100%;
+      max-width: 1200px;
     }
 
-    .ura-panel-button:active {
-      transform: translateY(0);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .ura-panel-button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: rgba(255, 255, 255, 0.1);
-      transition: all 0.5s ease-out;
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      z-index: 1;
-    }
-
-    .ura-panel-button:hover::before {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .button-text {
-      position: relative;
-      z-index: 2;
-    }
+    /* Removed .ura-panel-button styling as the button is removed in HTML */
   </style>
 </head>
 <body>
   <header class="header">
     <div class="header-left">
-      <h1>URA BATTLE</h1>
-      <p class="subtitle">EBMS-09 SERVER </p>
+      <h1>URA<span style="font-size:0.7em; color:#66ccff; margin-left:5px;"></span></h1>
+      <p class="subtitle">EBMS-09 SERVER: <span style="color:#00aaff; font-weight:600;"></span></p>
     </div>
-    <a href="previous.html" class="btn btn-top">View Previous Match</a>
-  </header>
+    </header>
 
   <div class="container">
     <div class="main-content">
@@ -446,15 +322,12 @@
           <li><b>Change Chat Name:</b> <code>//changemyname(@yourname)/bgs</code></li>
           <li><b>Send Money:</b> <code>//Transfer(Amount) to_Users(@chatusername)/bgs</code></li>
         </ul>
-        <p class="commands-notice">⚠️ Use these commands with URA AI, not Utkarsh AI.</p>
+        <p class="commands-notice">⚠️ 𝚄𝚜𝚎 𝚝𝚑𝚎𝚜𝚎 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚜 𝚠𝚒𝚝𝚑 𝚄𝚁𝙰 𝙰𝙸, 𝚗𝚘𝚝 𝚄𝚝𝚔𝚊𝚛𝚜𝚑 𝙰𝙸.</p>
       </div>
       <div class="panel btc-panel">
         <h2 class="panel-title">💰 Bitcoin Leaderboard</h2>
-        <div class="info-line"><span class="highlight">🥇 @Daku_x-RT</span> — 6.9M$</div>
-        <div class="info-line"><span class="highlight">🥈 @Evil Viper</span> — 4.6M$</div>
-        <div class="info-line"><span class="highlight">🥉 @Max-Rt</span> — 1M$</div>
         <div class="info-line" style="margin-top: 15px;">Note: Bitcoin value changes anytime.</div>
-        <div class="info-line" style="margin-top: 15px;">𝓒𝓾𝓻𝓻𝓮𝓷𝓽 𝓥𝓪𝓵𝓾𝓮 𝓲𝓼 :- ~7𝓜 $=25Rs.</div>
+        <div class="btc-value">Current Value is: ~772M $ = 25Rs.</div>
         
         <div class="action-buttons">
           <a href="nnn.html" class="btn btn-gold">Money & Redeem Codes</a>
@@ -463,17 +336,13 @@
     </div>
   </div>
 
-  <a href="server.html" class="ura-panel-button">
-    <span class="button-text">URA-Battle T-2 Final</span>
-  </a>
-
-  <footer>URA Networks © 2025 — Stay Active 🚀</footer>
+  <footer>𝚄𝚁𝙰 𝙽𝚎𝚝𝚠𝚘𝚛𝚔𝚜 © 2025 — 𝚂𝚝𝚊𝚢 𝙰𝚌𝚝𝚒𝚟𝚎 🚀</footer>
 
   <div id="systemNoticePopup" class="system-notice-overlay">
     <div class="system-notice-content">
-      <span id="closeNoticeButton" class="system-notice-close">❌</span>
-      <h3>System Notice ⚠️</h3>
-      <p>We are facing delay in updates. Our team is working on it.</p>
+      <span id="closeNoticeButton" class="system-notice-close" title="Close">X</span>
+      <h3>SYSTEM NOTICE <span style="color:#ff0000;">[ERROR]</span></h3>
+      <p>𝚆𝚎 𝚊𝚛𝚎 𝚏𝚊𝚌𝚒𝚗𝚐 𝙲𝚛𝚒𝚝𝚒𝚌𝚊𝚕 𝚍𝚎𝚕𝚊𝚢 𝚒𝚗 𝚄𝚙𝚍𝚊𝚝𝚎𝚜 . 𝙾𝚞𝚛 𝚝𝚎𝚊𝚖 𝚒𝚜 𝚠𝚘𝚛𝚔𝚒𝚗𝚐 𝚘𝚗 𝚒𝚝 .</p>
     </div>
   </div>
 
